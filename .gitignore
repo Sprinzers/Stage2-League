@@ -2,6 +2,7 @@
 .idea/
 out/
 src/checker/
-src/test/
+src/test/test.in
+src/test/test.out
 src/checker.sh
 src/FileIO.jar
