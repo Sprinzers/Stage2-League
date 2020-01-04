@@ -1,6 +1,9 @@
 package champion;
 
 import angel.Angel;
+import strategy.StrategyPyromancer;
+import strategy.FirstStrategyPyromancer;
+import strategy.SecondStrategyPyromancer;
 import util.Constants;
 
 public class Pyromancer extends Champion {
@@ -34,6 +37,23 @@ public class Pyromancer extends Champion {
 
         setRaceModWizardFirst(Constants.MODIFIER_5_POS);
         setRaceModWizardSecond(Constants.MODIFIER_5_POS);
+    }
+
+    /**
+     *  Method used to apply the right strategy.
+     */
+    public void applyStrategy() {
+        StrategyPyromancer strategy;
+
+        int hpLow = calculateTeoreticalHP() / 3;
+        int hpHigh = calculateTeoreticalHP() / 2;
+        if (hpLow < getHP() && getHP() < hpHigh) {
+            strategy = new FirstStrategyPyromancer();
+            strategy.doStrategy(this);
+        } else if (getHP() < hpLow) {
+            strategy = new SecondStrategyPyromancer();
+            strategy.doStrategy(this);
+        }
     }
 
     /**

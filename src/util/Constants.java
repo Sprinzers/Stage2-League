@@ -86,6 +86,8 @@ public final class Constants {
     public static final float DAMAGE_MOD_30 = 0.30f;
     public static final float DAMAGE_MOD_40 = 0.4f;
     public static final float DAMAGE_MOD_50 = 0.5f;
+    public static final float DAMAGE_MOD_60 = 0.6f;
+    public static final float DAMAGE_MOD_70 = 0.7f;
 
     public static final int HP_MOD_10 = 10;
     public static final int HP_MOD_15 = 15;

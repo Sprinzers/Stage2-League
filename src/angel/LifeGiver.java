@@ -19,7 +19,11 @@ public class LifeGiver extends Angel {
     @Override
     public void applyEffect(final Knight knight) {
         if (knight.isAlive()) {
-            knight.addHP(Constants.HP_MOD_100);
+            if (knight.getHP() + Constants.HP_MOD_100 > knight.calculateTeoreticalHP()) {
+                knight.setHP(knight.calculateTeoreticalHP());
+            } else {
+                knight.addHP(Constants.HP_MOD_100);
+            }
         }
     }
     /**
@@ -29,7 +33,11 @@ public class LifeGiver extends Angel {
     @Override
     public void applyEffect(final Pyromancer pyromancer) {
         if (pyromancer.isAlive()) {
-            pyromancer.addHP(Constants.HP_MOD_80);
+            if (pyromancer.getHP() + Constants.HP_MOD_80 > pyromancer.calculateTeoreticalHP()) {
+                pyromancer.setHP(pyromancer.calculateTeoreticalHP());
+            } else {
+                pyromancer.addHP(Constants.HP_MOD_80);
+            }
         }
     }
     /**
@@ -39,7 +47,11 @@ public class LifeGiver extends Angel {
     @Override
     public void applyEffect(final Rogue rogue) {
         if (rogue.isAlive()) {
-            rogue.addHP(Constants.HP_MOD_90);
+            if (rogue.getHP() + Constants.HP_MOD_90 > rogue.calculateTeoreticalHP()) {
+                rogue.setHP(rogue.calculateTeoreticalHP());
+            } else {
+                rogue.addHP(Constants.HP_MOD_90);
+            }
         }
     }
     /**
@@ -49,7 +61,11 @@ public class LifeGiver extends Angel {
     @Override
     public void applyEffect(final Wizard wizard) {
         if (wizard.isAlive()) {
-            wizard.addHP(Constants.HP_MOD_120);
+            if (wizard.getHP() + Constants.HP_MOD_120 > wizard.calculateTeoreticalHP()) {
+                wizard.setHP(wizard.calculateTeoreticalHP());
+            } else {
+                wizard.addHP(Constants.HP_MOD_120);
+            }
         }
     }
 }

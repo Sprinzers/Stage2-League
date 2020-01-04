@@ -20,7 +20,11 @@ public class SmallAngel extends Angel {
     public void applyEffect(final Knight knight) {
         if (knight.isAlive()) {
             knight.increaseRaceMod(Constants.DAMAGE_MOD_10);
-            knight.addHP(Constants.HP_MOD_10);
+            if (knight.getHP() + Constants.HP_MOD_10 > knight.calculateTeoreticalHP()) {
+                knight.setHP(knight.calculateTeoreticalHP());
+            } else {
+                knight.addHP(Constants.HP_MOD_10);
+            }
         }
     }
     /**
@@ -31,7 +35,11 @@ public class SmallAngel extends Angel {
     public void applyEffect(final Pyromancer pyromancer) {
         if (pyromancer.isAlive()) {
             pyromancer.increaseRaceMod(Constants.DAMAGE_MOD_15);
-            pyromancer.addHP(Constants.HP_MOD_15);
+            if (pyromancer.getHP() + Constants.HP_MOD_15 > pyromancer.calculateTeoreticalHP()) {
+                pyromancer.setHP(pyromancer.calculateTeoreticalHP());
+            } else {
+                pyromancer.addHP(Constants.HP_MOD_15);
+            }
         }
     }
     /**
@@ -42,7 +50,11 @@ public class SmallAngel extends Angel {
     public void applyEffect(final Rogue rogue) {
         if (rogue.isAlive()) {
             rogue.increaseRaceMod(Constants.DAMAGE_MOD_5);
-            rogue.addHP(Constants.HP_MOD_20);
+            if (rogue.getHP() + Constants.HP_MOD_20 > rogue.calculateTeoreticalHP()) {
+                rogue.setHP(rogue.calculateTeoreticalHP());
+            } else {
+                rogue.addHP(Constants.HP_MOD_20);
+            }
         }
     }
     /**
@@ -53,7 +65,11 @@ public class SmallAngel extends Angel {
     public void applyEffect(final Wizard wizard) {
         if (wizard.isAlive()) {
             wizard.increaseRaceMod(Constants.DAMAGE_MOD_10);
-            wizard.addHP(Constants.HP_MOD_25);
+            if (wizard.getHP() + Constants.HP_MOD_25 > wizard.calculateTeoreticalHP()) {
+                wizard.setHP(wizard.calculateTeoreticalHP());
+            } else {
+                wizard.addHP(Constants.HP_MOD_25);
+            }
         }
     }
 }

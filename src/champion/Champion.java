@@ -1,6 +1,7 @@
 package champion;
 
 import angel.Angel;
+import observer.Observer;
 import util.Constants;
 
 import java.util.ArrayList;
@@ -34,6 +35,15 @@ public abstract class Champion {
     private float raceModPyromancerSecond;
     private float raceModRogueFirst;
     private float raceModRogueSecond;
+    private Observer observer;
+
+    public void addObserver(Observer newObserver) {
+        observer = newObserver;
+    }
+
+    public String notifyKill(Champion killer) {
+        return observer.updateKill(this, killer);
+    }
 
     public final void increaseRaceMod(final float newRaceMod) {
         raceModWizardFirst += newRaceMod;
@@ -93,6 +103,10 @@ public abstract class Champion {
         }
     }
 
+    public void isKilled(Champion champion) {
+
+    }
+
     /**
      *  Method is used to determine if champion is a valid opponent.
      * @param champion opponent that "this" will fight
@@ -131,7 +145,11 @@ public abstract class Champion {
      * @return true if the champion is alive, false if he is dead
      */
     public boolean isAlive() {
-        return hp > 0;
+        if (hp <= 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -190,7 +208,7 @@ public abstract class Champion {
      *  Method is used to determine the maximum possible HP at a given point.
      * @return maximum possible HP
      */
-    final int calculateTeoreticalHP() {
+    public final int calculateTeoreticalHP() {
         return hpStart + hpGrowth * level;
     }
     /**
@@ -199,6 +217,10 @@ public abstract class Champion {
      */
     private char getName() {
         return getClass().getName().charAt(Constants.NAME_INDEX);
+    }
+
+    public String getFullName() {
+        return getClass().getName().substring(getClass().getName().lastIndexOf(".") + 1);
     }
 
     final ArrayList<Integer> getDamageOverTime() {
@@ -311,7 +333,7 @@ public abstract class Champion {
         this.posY = posY;
     }
 
-    private int getID() {
+    public int getID() {
         return id;
     }
 

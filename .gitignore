@@ -1,0 +1,7 @@
+*.class
+.idea/
+out/
+src/checker/
+src/test/
+src/checker.sh
+src/FileIO.jar

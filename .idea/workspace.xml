@@ -1,16 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6d1744bb-a182-47f5-9d34-9c307bf57dcb" name="Default Changelist" comment="" />
+    <list default="true" id="6d1744bb-a182-47f5-9d34-9c307bf57dcb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Stage2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Stage2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/angel/Angel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/Angel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/angel/GoodBoy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/GoodBoy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/angel/LifeGiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/LifeGiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/angel/SmallAngel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/SmallAngel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/champion/Champion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/champion/Champion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/champion/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/champion/Knight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/champion/Pyromancer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/champion/Pyromancer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/champion/Rogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/champion/Rogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/champion/Wizard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/champion/Wizard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/input/GameInputLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/input/GameInputLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/test.out" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/test.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Constants.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1VnisjGg5bzz6i45psSqEtvo8gs" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../fileio_jar/FileIO.jar!/" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -24,6 +58,16 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="main.Main" />
+      <module name="Stage2" />
+      <option name="PROGRAM_PARAMETERS" value="./src/test/test.in ./src/test/test.out" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -36,5 +80,18 @@
       <updated>1577895468239</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

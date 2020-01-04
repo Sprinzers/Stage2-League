@@ -1,7 +1,10 @@
 package main;
 
+import angel.Angel;
+import angel.AngelFactory;
 import champion.Champion;
 import champion.ChampionFactory;
+import observer.GreatMagician;
 import util.Constants;
 import game.TileMap;
 import input.GameInput;
@@ -19,6 +22,8 @@ public final class Main {
         TileMap map = TileMap.getInstance();
 
         ArrayList<Champion> champions = new ArrayList<Champion>();
+        ArrayList<String> notifications = new ArrayList<>();
+        GreatMagician greatMagician = GreatMagician.getInstance();
 
         for (int i = 0; i < gameInput.getChampionsOrder().size(); ++i) {
             // place the champions at the initial position
@@ -28,10 +33,30 @@ public final class Main {
             Champion newChampion = ChampionFactory.getChampion(currChampion
                     .get(Constants.CHAMPION_TYPE), posX, posY);
             newChampion.setID(i);
+            newChampion.addObserver(greatMagician);
             champions.add(newChampion);
         }
+        ArrayList<ArrayList<Angel>> angels = new ArrayList<ArrayList<Angel>>();
+        // create all angels
+        for (int i = 0; i < gameInput.getAngelSpawn().size(); ++i) {
+            ArrayList<Angel> currRoundAngels = new ArrayList<Angel>();
+            for (int j = 0; j < gameInput.getAngelSpawn().get(i).size(); ++j) {
+                String[] parts = gameInput.getAngelSpawn().get(i).get(j).split(",");
+                String angelName = parts[0];
+                int posX = Integer.parseInt(parts[1]);
+                int posY = Integer.parseInt(parts[2]);
+                Angel newAngel = AngelFactory.getAngel(angelName, posX, posY);
+                newAngel.addObserver(greatMagician);
+                currRoundAngels.add(newAngel);
+            }
+            angels.add(currRoundAngels);
+        }
+
         // move all the champions
         for (int i = 0; i < gameInput.getRoundsOrder().size(); ++i) {
+            int round = i + 1;
+            notifications.add("~~ Round " + round + " ~~\n");
+
             for (int j = 0; j < gameInput.getRoundsOrder().get(i).length(); ++j) {
                 if (champions.get(j).isAlive() && !champions.get(j).isIncapacitated()) {
                     char move = gameInput.getRoundsOrder().get(i).charAt(j);
@@ -65,10 +90,14 @@ public final class Main {
                                 if (opponent.awardXP(levelFirstChampion)) {
                                     opponent.restoreHP();
                                 }
+                                notifications.add(currChampion.notifyKill(opponent));
+
                             } else if (currChampion.isAlive() && !opponent.isAlive()) {
                                 if (currChampion.awardXP(levelSecondChampion)) {
                                     currChampion.restoreHP();
                                 }
+                                notifications.add(opponent.notifyKill(currChampion));
+
                             } else if (!currChampion.isAlive() && !opponent.isAlive()) {
                                 currChampion.awardXP(levelSecondChampion);
                                 opponent.awardXP(levelFirstChampion);
@@ -82,7 +111,17 @@ public final class Main {
                 currChampion.setFoughtThisRound(false);
                 currChampion.increaseRoundCounter();
             }
+
+            for (int j = 0; j < angels.get(i).size(); ++j) {
+                notifications.add(angels.get(i).get(j).spawnAngel());
+            }
+            notifications.add("\n");
+
+//            for (Champion champion : champions) {
+//                System.out.println(champion.getFullName() + " " + champion.getID() + " " + champion.getHP() + " " + champion.isAlive());
+//            }
+//            System.out.println();
         }
-        gameInputLoader.write(champions);
+        gameInputLoader.write(champions, notifications);
     }
 }

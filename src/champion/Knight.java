@@ -1,6 +1,9 @@
 package champion;
 
 import angel.Angel;
+import strategy.FirstStrategyKnight;
+import strategy.SecondStrategyKnight;
+import strategy.StrategyKnight;
 import util.Constants;
 
 public class Knight extends Champion {
@@ -34,6 +37,23 @@ public class Knight extends Champion {
 
         setRaceModWizardFirst(Constants.MODIFIER_20_NEG);
         setRaceModWizardSecond(Constants.MODIFIER_5_POS);
+    }
+
+    /**
+     *  Method used to apply the right strategy.
+     */
+    public void applyStrategy() {
+        StrategyKnight strategy;
+
+        int hpLow = calculateTeoreticalHP() / 3;
+        int hpHigh = calculateTeoreticalHP() / 2;
+        if (hpLow < getHP() && getHP() < hpHigh) {
+            strategy = new FirstStrategyKnight();
+            strategy.doStrategy(this);
+        } else if (getHP() < hpLow) {
+            strategy = new SecondStrategyKnight();
+            strategy.doStrategy(this);
+        }
     }
 
     /**
