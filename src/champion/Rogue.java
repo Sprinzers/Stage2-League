@@ -48,8 +48,8 @@ public class Rogue extends Champion {
     public void applyStrategy() {
         StrategyRogue strategy;
 
-        int hpLow = calculateTeoreticalHP() / 7;
-        int hpHigh = calculateTeoreticalHP() / 5;
+        int hpLow = calculateTeoreticalHP() / Constants.ROGUE_HP_LOW;
+        int hpHigh = calculateTeoreticalHP() / Constants.ROGUE_HP_HIGH;
         if (hpLow < getHP() && getHP() < hpHigh) {
             strategy = new FirstStrategyRogue();
             strategy.doStrategy(this);
@@ -57,6 +57,36 @@ public class Rogue extends Champion {
             strategy = new SecondStrategyRogue();
             strategy.doStrategy(this);
         }
+    }
+
+    /**
+     *  Method used to change the race modifier.
+     * @param newRaceMod race modifier to be added.
+     */
+    public void increaseRaceMod(final float newRaceMod) {
+        setRaceModWizardFirst(getRaceModWizardFirst() + newRaceMod);
+        setRaceModWizardSecond(getRaceModWizardSecond() + newRaceMod);
+        setRaceModRogueFirst(getRaceModRogueFirst() + newRaceMod);
+        setRaceModRogueSecond(getRaceModRogueSecond() + newRaceMod);
+        setRaceModPyromancerFirst(getRaceModPyromancerFirst() + newRaceMod);
+        setRaceModPyromancerSecond(getRaceModPyromancerSecond() + newRaceMod);
+        setRaceModKnightFirst(getRaceModKnightFirst() + newRaceMod);
+        setRaceModKnightSecond(getRaceModKnightSecond() + newRaceMod);
+    }
+
+    /**
+     *  Method used to change the race modifier.
+     * @param newRaceMod race modifier to be substracted
+     */
+    public void reduceRaceMod(final float newRaceMod) {
+        setRaceModWizardFirst(getRaceModWizardFirst() - newRaceMod);
+        setRaceModWizardSecond(getRaceModWizardSecond() + newRaceMod);
+        setRaceModRogueFirst(getRaceModRogueFirst() - newRaceMod);
+        setRaceModRogueSecond(getRaceModRogueSecond() - newRaceMod);
+        setRaceModPyromancerFirst(getRaceModPyromancerFirst() - newRaceMod);
+        setRaceModPyromancerSecond(getRaceModPyromancerSecond() - newRaceMod);
+        setRaceModKnightFirst(getRaceModKnightFirst() - newRaceMod);
+        setRaceModKnightSecond(getRaceModKnightSecond() - newRaceMod);
     }
 
     /**

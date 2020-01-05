@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d1744bb-a182-47f5-9d34-9c307bf57dcb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/angel/Angel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/Angel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/angel/DamageAngel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/DamageAngel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/angel/DarkAngel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/DarkAngel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/angel/Dracula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/Dracula.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/angel/GoodBoy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/GoodBoy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/angel/LevelUpAngel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/LevelUpAngel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/angel/LifeGiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/LifeGiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/angel/SmallAngel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/SmallAngel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/angel/Spawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/Spawner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/angel/TheDoomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/TheDoomer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/angel/XPAngel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/XPAngel.java" afterDir="false" />
@@ -20,11 +16,21 @@
       <change beforePath="$PROJECT_DIR$/src/champion/Pyromancer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/champion/Pyromancer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/champion/Rogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/champion/Rogue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/champion/Wizard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/champion/Wizard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/checker/checker.sh" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/input/GameInputLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/input/GameInputLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/observer/GreatMagician.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/observer/GreatMagician.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/observer/Observer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/observer/Observer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strategy/FirstStrategyKnight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/FirstStrategyKnight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strategy/FirstStrategyPyromancer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/FirstStrategyPyromancer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strategy/FirstStrategyRogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/FirstStrategyRogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strategy/FirstStrategyWizard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/FirstStrategyWizard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strategy/SecondStrategyKnight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/SecondStrategyKnight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strategy/SecondStrategyPyromancer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/SecondStrategyPyromancer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strategy/SecondStrategyRogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/SecondStrategyRogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strategy/SecondStrategyWizard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/SecondStrategyWizard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strategy/StrategyPyromancer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/StrategyPyromancer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strategy/StrategyRogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/StrategyRogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Constants.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

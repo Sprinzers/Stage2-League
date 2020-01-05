@@ -21,9 +21,7 @@ public class DarkAngel extends Angel {
     @Override
     public void applyEffect(final Knight knight) throws IOException {
         if (knight.isAlive()) {
-            System.out.println("INAINTE:" + knight.getHP());
             knight.reduceHP(Constants.HP_MOD_40);
-            System.out.println("DUPA:" + knight.getHP());
             notifyHit(knight);
         }
     }

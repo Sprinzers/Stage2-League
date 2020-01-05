@@ -41,6 +41,10 @@ public class Knight extends Champion {
         setRaceModWizardSecond(Constants.MODIFIER_5_POS);
     }
 
+    /**
+     *  Method used to change the race modifier.
+     * @param newRaceMod race modifier to be added on top of the existing one.
+     */
     public void increaseRaceMod(final float newRaceMod) {
         setRaceModWizardFirst(getRaceModWizardFirst() + newRaceMod);
         setRaceModWizardSecond(getRaceModWizardSecond() + newRaceMod);
@@ -51,6 +55,10 @@ public class Knight extends Champion {
         setRaceModKnightSecond(getRaceModKnightSecond() + newRaceMod);
     }
 
+    /**
+     *  Method used to change the race modifier.
+     * @param newRaceMod race modifier to be subtracted from the existing one.
+     */
     public void reduceRaceMod(final float newRaceMod) {
         setRaceModWizardFirst(getRaceModWizardFirst() - newRaceMod);
         setRaceModWizardSecond(getRaceModWizardSecond() - newRaceMod);
@@ -68,8 +76,8 @@ public class Knight extends Champion {
     public void applyStrategy() {
         StrategyKnight strategy;
 
-        int hpLow = calculateTeoreticalHP() / 3;
-        int hpHigh = calculateTeoreticalHP() / 2;
+        int hpLow = calculateTeoreticalHP() / Constants.KNIGHT_HP_LOW;
+        int hpHigh = calculateTeoreticalHP() / Constants.KNIGHT_HP_HIGH;
         if (hpLow < getHP() && getHP() < hpHigh) {
             strategy = new FirstStrategyKnight();
             strategy.doStrategy(this);
@@ -233,6 +241,7 @@ public class Knight extends Champion {
         wizard.setIncapacitated(Constants.KNIGHT_INCAPACITATION_ROUNDS);
         // apply damage to enemy
         int totalDamage = Math.round(firstDamage) + Math.round(secondDamage);
+        System.out.println("!!KNIGHT: " + totalDamage);
         wizard.reduceHP(totalDamage);
     }
 

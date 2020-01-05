@@ -37,39 +37,29 @@ public abstract class Champion {
     private float raceModRogueFirst;
     private float raceModRogueSecond;
     private Observer observer;
-
-    public void addObserver(Observer newObserver) {
+    /**
+     *  Method is used to register an observer.
+     * @param newObserver observer to be added.
+     */
+    public void addObserver(final Observer newObserver) {
         observer = newObserver;
     }
 
-    public void notifyKill(Champion killer) throws IOException {
+    /**
+     *  Method is used to notify the observer when a kill occurs.
+     * @param killer champion that killed
+     * @throws IOException
+     */
+    public void notifyKill(final Champion killer) throws IOException {
         observer.updateKill(this, killer);
     }
 
+    /**
+     *  Method is used to notify the observer when the champion levels up.
+     * @throws IOException
+     */
     public void notifyLevelUp() throws IOException {
         observer.updateLevelUp(this);
-    }
-
-    public void increaseRaceMod(final float newRaceMod) {
-        raceModWizardFirst += newRaceMod;
-        raceModWizardSecond += newRaceMod;
-        raceModKnightFirst += newRaceMod;
-        raceModKnightSecond += newRaceMod;
-        raceModPyromancerFirst += newRaceMod;
-        raceModPyromancerSecond += newRaceMod;
-        raceModRogueFirst += newRaceMod;
-        raceModRogueSecond += newRaceMod;
-    }
-
-    public void reduceRaceMod(final float newRaceMod) {
-        raceModWizardFirst -= newRaceMod;
-        raceModWizardSecond -= newRaceMod;
-        raceModKnightFirst -= newRaceMod;
-        raceModKnightSecond -= newRaceMod;
-        raceModPyromancerFirst -= newRaceMod;
-        raceModPyromancerSecond -= newRaceMod;
-        raceModRogueFirst -= newRaceMod;
-        raceModRogueSecond -= newRaceMod;
     }
 
     /**
@@ -109,11 +99,6 @@ public abstract class Champion {
             return (getName() + " dead\n");
         }
     }
-
-    public void isKilled(Champion champion) {
-
-    }
-
     /**
      *  Method is used to determine if champion is a valid opponent.
      * @param champion opponent that "this" will fight
@@ -153,11 +138,7 @@ public abstract class Champion {
      * @return true if the champion is alive, false if he is dead
      */
     public boolean isAlive() {
-        if (hp <= 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return hp > 0;
     }
 
     /**
@@ -220,14 +201,14 @@ public abstract class Champion {
         return hpStart + hpGrowth * level;
     }
     /**
-     *  Method is used to determine the name of a champion by its class.
+     *  Method is used to determine the initial of a champion by its class.
      * @return  char representing champion type
      */
     private char getName() {
         return getClass().getName().charAt(Constants.NAME_INDEX);
     }
 
-    public String getFullName() {
+    public final  String getFullName() {
         return getClass().getName().substring(getClass().getName().lastIndexOf(".") + 1);
     }
 
@@ -341,7 +322,7 @@ public abstract class Champion {
         this.posY = posY;
     }
 
-    public int getID() {
+    public final int getID() {
         return id;
     }
 

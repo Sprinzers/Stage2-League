@@ -48,8 +48,8 @@ public class Pyromancer extends Champion {
     public void applyStrategy() {
         StrategyPyromancer strategy;
 
-        int hpLow = calculateTeoreticalHP() / 4;
-        int hpHigh = calculateTeoreticalHP() / 3;
+        int hpLow = calculateTeoreticalHP() / Constants.PYROMANCER_HP_LOW;
+        int hpHigh = calculateTeoreticalHP() / Constants.PYROMANCER_HP_HIGH;
         if (hpLow < getHP() && getHP() < hpHigh) {
             strategy = new FirstStrategyPyromancer();
             strategy.doStrategy(this);
@@ -57,6 +57,36 @@ public class Pyromancer extends Champion {
             strategy = new SecondStrategyPyromancer();
             strategy.doStrategy(this);
         }
+    }
+
+    /**
+     *  Method used to change the race modifier.
+     * @param newRaceMod race modifier to be added.
+     */
+    public void increaseRaceMod(final float newRaceMod) {
+        setRaceModWizardFirst(getRaceModWizardFirst() + newRaceMod);
+        setRaceModWizardSecond(getRaceModWizardSecond() + newRaceMod);
+        setRaceModRogueFirst(getRaceModRogueFirst() + newRaceMod);
+        setRaceModRogueSecond(getRaceModRogueSecond() + newRaceMod);
+        setRaceModPyromancerFirst(getRaceModPyromancerFirst() + newRaceMod);
+        setRaceModPyromancerSecond(getRaceModPyromancerSecond() + newRaceMod);
+        setRaceModKnightFirst(getRaceModKnightFirst() + newRaceMod);
+        setRaceModKnightSecond(getRaceModKnightSecond() + newRaceMod);
+    }
+
+    /**
+     *  Method used to change the race modifier.
+     * @param newRaceMod race modifier to be substracted
+     */
+    public void reduceRaceMod(final float newRaceMod) {
+        setRaceModWizardFirst(getRaceModWizardFirst() - newRaceMod);
+        setRaceModWizardSecond(getRaceModWizardSecond() + newRaceMod);
+        setRaceModRogueFirst(getRaceModRogueFirst() - newRaceMod);
+        setRaceModRogueSecond(getRaceModRogueSecond() - newRaceMod);
+        setRaceModPyromancerFirst(getRaceModPyromancerFirst() - newRaceMod);
+        setRaceModPyromancerSecond(getRaceModPyromancerSecond() - newRaceMod);
+        setRaceModKnightFirst(getRaceModKnightFirst() - newRaceMod);
+        setRaceModKnightSecond(getRaceModKnightSecond() - newRaceMod);
     }
 
     /**
@@ -176,6 +206,7 @@ public class Pyromancer extends Champion {
             firstDamage += firstDamage * getTerrainModifier();
             secondDamage += secondDamage * getTerrainModifier();
             overTime += overTime * getTerrainModifier();
+            overTime = Math.round(overTime);
         }
         // race modifier
         firstDamage *= getRaceModWizardFirst();

@@ -64,13 +64,9 @@ public final class Main {
             for (int j = 0; j < gameInput.getRoundsOrder().get(i).length(); ++j) {
                 if (champions.get(j).isAlive() && !champions.get(j).isIncapacitated()) {
                     char move = gameInput.getRoundsOrder().get(i).charAt(j);
-//                    fileWriter.write(champions.get(j).getFullName() + champions.get(j).getID() + " " + champions.get(j).getHP());
                     champions.get(j).applyStrategy();
-//                    fileWriter.write(champions.get(j).getFullName() + champions.get(j).getID() + " " + champions.get(j).getHP());
-
                     champions.get(j).makeMove(move);
                 }
-//                System.out.println(champions.get(j).getHP() + " " + champions.get(j).getFullName() + champions.get(j).getLevel() + " " + round);
             }
             // determine which champions have a terrain modifier active and apply DOT effects
             for (Champion currChampion : champions) {
@@ -100,7 +96,6 @@ public final class Main {
                                 if (opponent.awardXP(levelFirstChampion)) {
                                     opponent.restoreHP();
                                 }
-
                             } else if (currChampion.isAlive() && !opponent.isAlive()) {
                                 opponent.notifyKill(currChampion);
                                 if (currChampion.awardXP(levelSecondChampion)) {
@@ -110,8 +105,6 @@ public final class Main {
                             } else if (!currChampion.isAlive() && !opponent.isAlive()) {
                                 opponent.notifyKill(currChampion);
                                 currChampion.notifyKill(opponent);
-//                                currChampion.awardXP(levelSecondChampion);
-//                                opponent.awardXP(levelFirstChampion);
                                 opponent.setXP();
                                 currChampion.setXP();
                             }
@@ -126,16 +119,13 @@ public final class Main {
             }
 
             for (int j = 0; j < angels.get(i).size(); ++j) {
-
                 angels.get(i).get(j).spawnAngel();
                 for (Champion champion : champions) {
                     if (angels.get(i).get(j).verifyChampionPosition(champion)) {
                         champion.effectAppliedBy(angels.get(i).get(j));
-//                        System.out.println(champion.getFullName() + " " + champion.getHP());
                     }
                 }
             }
-
             fileWriter.write("\n");
         }
         fileWriter.write("~~ Results ~~\n");

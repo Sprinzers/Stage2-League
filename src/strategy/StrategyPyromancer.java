@@ -4,5 +4,5 @@ import champion.Pyromancer;
 
 public interface StrategyPyromancer {
 
-    void doStrategy (Pyromancer pyromancer);
+    void doStrategy(Pyromancer pyromancer);
 }

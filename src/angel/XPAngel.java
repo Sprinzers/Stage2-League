@@ -23,7 +23,7 @@ public class XPAngel extends Angel {
         if (knight.isAlive()) {
             knight.addXP(Constants.XP_45);
             notifyHelp(knight);
-            if (knight.getXP() >= knight.calculateLevelUpLimit()) {
+            while (knight.getXP() >= knight.calculateLevelUpLimit()) {
                 knight.increaseLevel();
                 notifyLevelUp(knight);
                 knight.setHP(knight.calculateTeoreticalHP());
@@ -39,7 +39,7 @@ public class XPAngel extends Angel {
         if (pyromancer.isAlive()) {
             pyromancer.addXP(Constants.XP_50);
             notifyHelp(pyromancer);
-            if (pyromancer.getXP() >= pyromancer.calculateLevelUpLimit()) {
+            while (pyromancer.getXP() >= pyromancer.calculateLevelUpLimit()) {
                 pyromancer.increaseLevel();
                 notifyLevelUp(pyromancer);
                 pyromancer.setHP(pyromancer.calculateTeoreticalHP());
@@ -55,7 +55,7 @@ public class XPAngel extends Angel {
         if (rogue.isAlive()) {
             rogue.addXP(Constants.XP_40);
             notifyHelp(rogue);
-            if (rogue.getXP() >= rogue.calculateLevelUpLimit()) {
+            while (rogue.getXP() >= rogue.calculateLevelUpLimit()) {
                 rogue.increaseLevel();
                 notifyLevelUp(rogue);
                 rogue.setHP(rogue.calculateTeoreticalHP());
@@ -71,7 +71,7 @@ public class XPAngel extends Angel {
         if (wizard.isAlive()) {
             wizard.addXP(Constants.XP_60);
             notifyHelp(wizard);
-            if (wizard.getXP() >= wizard.calculateLevelUpLimit()) {
+            while (wizard.getXP() >= wizard.calculateLevelUpLimit()) {
                 wizard.increaseLevel();
                 notifyLevelUp(wizard);
                 wizard.setHP(wizard.calculateTeoreticalHP());

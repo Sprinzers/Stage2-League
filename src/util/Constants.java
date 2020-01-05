@@ -110,5 +110,20 @@ public final class Constants {
     public static final int XP_45 = 45;
     public static final int XP_50 = 50;
     public static final int XP_60 = 60;
-
+    public static final int KNIGHT_STRATEGY_HP_LOSS = 5;
+    public static final int PYROMANCER_STRATEGY_HP_LOSS = 4;
+    public static final int ROGUE_STRATEGY_HP_LOSS = 7;
+    public static final int WIZARD_STRATEGY_HP_LOSS = 10;
+    public static final int KNIGHT_DEFENSIVE = 4;
+    public static final int PYROMANCER_DEFENSIVE = 3;
+    public static final int ROGUE_DEFENSIVE = 2;
+    public static final int WIZARD_DEFENSIVE = 5;
+    public static final int KNIGHT_HP_LOW = 3;
+    public static final int KNIGHT_HP_HIGH = 2;
+    public static final int PYROMANCER_HP_LOW = 4;
+    public static final int PYROMANCER_HP_HIGH = 3;
+    public static final int ROGUE_HP_LOW = 7;
+    public static final int ROGUE_HP_HIGH = 5;
+    public static final int WIZARD_HP_LOW = 4;
+    public static final int WIZARD_HP_HIGH = 2;
 }

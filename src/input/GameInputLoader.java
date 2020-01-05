@@ -1,6 +1,5 @@
 package input;
 
-import champion.Champion;
 import fileio.FileSystem;
 
 import java.util.ArrayList;

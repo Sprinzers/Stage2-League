@@ -8,17 +8,17 @@ import java.io.IOException;
 public abstract class Observer {
     protected Angel subject;
 
-    public abstract void updateKill(final Champion victim, final Champion killer) throws IOException;
+    public abstract void updateKill(Champion victim, Champion killer) throws IOException;
 
-    public abstract void updateSpawn(final Angel angel) throws IOException;
+    public abstract void updateSpawn(Angel angel) throws IOException;
 
-    public abstract void updateHit(final Angel angel, final Champion champion) throws IOException;
+    public abstract void updateHit(Angel angel, Champion champion) throws IOException;
 
-    public abstract void updateHelp(final Angel angel, final Champion champion) throws IOException;
+    public abstract void updateHelp(Angel angel, Champion champion) throws IOException;
 
-    public abstract void updateRevive(final Champion champion) throws IOException;
+    public abstract void updateRevive(Champion champion) throws IOException;
 
-    public abstract void updateLevelUp(final Champion champion) throws IOException;
+    public abstract void updateLevelUp(Champion champion) throws IOException;
 
-    public abstract void updateKillByAgel(final Champion champion) throws IOException;
+    public abstract void updateKillByAgel(Champion champion) throws IOException;
 }

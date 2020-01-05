@@ -4,5 +4,5 @@ import champion.Rogue;
 
 public interface StrategyRogue {
 
-    void doStrategy (Rogue rogue);
+    void doStrategy(Rogue rogue);
 }

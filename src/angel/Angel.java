@@ -1,6 +1,10 @@
 package angel;
 
-import champion.*;
+import champion.Champion;
+import champion.Knight;
+import champion.Pyromancer;
+import champion.Rogue;
+import champion.Wizard;
 import observer.Observer;
 
 import java.io.IOException;
@@ -11,52 +15,72 @@ public abstract class Angel {
     private int posY;
     private Observer observer;
 
-    public boolean verifyChampionPosition(final Champion champion) {
-        if (champion.getPosX() == getPosX() && champion.getPosY() == getPosY()) {
-            return true;
-        } else {
-            return false;
-        }
+    public final boolean verifyChampionPosition(final Champion champion) {
+        return champion.getPosX() == getPosX() && champion.getPosY() == getPosY();
     }
 
-    public Observer getObserver() {
+    final Observer getObserver() {
         return observer;
     }
 
-    public void notifySpawn() throws IOException {
+    /**
+     *  Method is used to notify the observer when an angel spawns.
+     * @throws IOException
+     */
+    private void notifySpawn() throws IOException {
         observer.updateSpawn(this);
     }
 
-    public void notifyHit(final Champion champion) throws IOException {
+    /**
+     *  Method is used to notify the observer when a bad angel interacts with a champion.
+     * @param champion champion hit
+     * @throws IOException
+     */
+    void notifyHit(final Champion champion) throws IOException {
         observer.updateHit(this, champion);
     }
 
-    public void notifyHelp(final Champion champion) throws IOException {
+    /**
+     *  Method is used to notify the observer when a good angel interacts with a champion.
+     * @param champion champion helped
+     * @throws IOException
+     */
+    void notifyHelp(final Champion champion) throws IOException {
         observer.updateHelp(this, champion);
     }
 
-    public void notifyLevelUp(final Champion champion) throws IOException {
+    /**
+     *  Method is used to notify the observer when an angel levels a champion up.
+     * @param champion champion leveled up
+     * @throws IOException
+     */
+    void notifyLevelUp(final Champion champion) throws IOException {
         observer.updateLevelUp(champion);
     }
 
-    public void notifyKill(final Champion champion) throws IOException {
+    /**
+     *  Method is used to notify the observer when an angels kills a champion.
+     * @param champion
+     * @throws IOException
+     */
+    void notifyKill(final Champion champion) throws IOException {
         observer.updateKillByAgel(champion);
     }
 
-    public void addObserver(Observer newObserver) {
+    public final void addObserver(final Observer newObserver) {
         observer = newObserver;
     }
 
-    public boolean isSpawned() {
+    public final boolean isSpawned() {
         return spawned;
     }
 
-    public void spawnAngel() throws IOException {
+    public final void spawnAngel() throws IOException {
         spawned = true;
         notifySpawn();
     }
 
-    public String getName() {
+    public final String getName() {
         return getClass().getName().substring(getClass().getName().lastIndexOf(".") + 1);
     }
 

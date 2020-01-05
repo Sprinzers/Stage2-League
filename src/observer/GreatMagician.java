@@ -6,15 +6,15 @@ import champion.Champion;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class GreatMagician extends Observer {
+public final class GreatMagician extends Observer {
     private static GreatMagician instance = null;
     private FileWriter fileWriter;
 
-    private GreatMagician(FileWriter fileWriter) {
+    private GreatMagician(final FileWriter fileWriter) {
         this.fileWriter = fileWriter;
     }
 
-    public static GreatMagician getInstance(FileWriter fileWriter) {
+    public static GreatMagician getInstance(final FileWriter fileWriter) {
         if (instance == null) {
             instance = new GreatMagician(fileWriter);
         }
@@ -34,19 +34,19 @@ public class GreatMagician extends Observer {
     }
 
     @Override
-    public void updateHit(Angel angel, Champion champion) throws IOException {
+    public void updateHit(final Angel angel, final Champion champion) throws IOException {
         fileWriter.write(angel.getName() + " hit " + champion.getFullName() + " "
                 + champion.getID() + "\n");
     }
 
     @Override
-    public void updateHelp(Angel angel, Champion champion) throws IOException {
+    public void updateHelp(final Angel angel, final Champion champion) throws IOException {
         fileWriter.write(angel.getName() + " helped " + champion.getFullName() + " "
                 + champion.getID() + "\n");
     }
 
     @Override
-    public void updateRevive(Champion champion) throws IOException {
+    public void updateRevive(final Champion champion) throws IOException {
         fileWriter.write("Player " + champion.getFullName() + " " + champion.getID()
                 + " was brought to life by an angel\n");
     }
@@ -58,7 +58,7 @@ public class GreatMagician extends Observer {
     }
 
     @Override
-    public void updateKillByAgel(Champion champion) throws IOException {
+    public void updateKillByAgel(final Champion champion) throws IOException {
         fileWriter.write("Player " + champion.getFullName() + " " + champion.getID()
                 + " was killed by an angel\n");
     }

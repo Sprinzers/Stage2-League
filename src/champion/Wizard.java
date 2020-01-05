@@ -40,6 +40,10 @@ public class Wizard extends Champion {
         setRaceModWizardFirst(Constants.MODIFIER_5_POS);
     }
 
+    /**
+     *  Method is used to change the race modifiers.
+     * @param newRaceMod race modifier to be added.
+     */
     public void increaseRaceMod(final float newRaceMod) {
         setRaceModWizardFirst(getRaceModWizardFirst() + newRaceMod);
         setRaceModRogueFirst(getRaceModRogueFirst() + newRaceMod);
@@ -50,6 +54,10 @@ public class Wizard extends Champion {
         setRaceModKnightSecond(getRaceModKnightSecond() + newRaceMod);
     }
 
+    /**
+     *  Method is used to change the race modifiers.
+     * @param newRaceMod race modifier to be subtracted
+     */
     public void reduceRaceMod(final float newRaceMod) {
         setRaceModWizardFirst(getRaceModWizardFirst() - newRaceMod);
         setRaceModRogueFirst(getRaceModRogueFirst() - newRaceMod);
@@ -67,8 +75,8 @@ public class Wizard extends Champion {
     public void applyStrategy() {
         StrategyWizard strategy;
 
-        int hpLow = calculateTeoreticalHP() / 4;
-        int hpHigh = calculateTeoreticalHP() / 2;
+        int hpLow = calculateTeoreticalHP() / Constants.WIZARD_HP_LOW;
+        int hpHigh = calculateTeoreticalHP() / Constants.WIZARD_HP_HIGH;
         if (hpLow < getHP() && getHP() < hpHigh) {
             strategy = new FirstStrategyWizard();
             strategy.doStrategy(this);
@@ -119,24 +127,28 @@ public class Wizard extends Champion {
         if (executePercent > Constants.KNIGHT_HP_PERCENT_CAP) {
             executePercent = Constants.KNIGHT_HP_PERCENT_CAP;
         }
-        if (this.getHPBeforeRound() <= this.calculateTeoreticalHP() * executePercent) {
-            // wizard will die from execute
-            int executeDamage = this.getHP();
-            float damageReflected = percentageSecond * executeDamage;
-            // apply damage to enemy
-            int totalDamageToGive = Math.round(firstDamage) + Math.round(damageReflected);
-            knight.reduceHP(totalDamageToGive);
-        } else {
+//        if (this.getHPBeforeRound() <= this.calculateTeoreticalHP() * executePercent) {
+//            // wizard will die from execute
+//            int executeDamage = this.getHP();
+//            System.out.println("EXECUTE:" + executeDamage);
+//            float damageReflected = percentageSecond * executeDamage;
+//            // apply damage to enemy
+//            int totalDamageToGive = Math.round(firstDamage) + Math.round(damageReflected);
+//            System.out.println(totalDamageToGive);
+//            knight.reduceHP(totalDamageToGive);
+//        } else {
             if (knight.getApplyTerrainModifier()) {
                 dmgTakenFirst += dmgTakenFirst * knight.getTerrainModifier();
                 dmgTakenSecond += dmgTakenSecond * knight.getTerrainModifier();
             }
             int totalDamageTaken = Math.round(dmgTakenFirst) + Math.round(dmgTakenSecond);
+            System.out.println("WIZ TAKEN DMG: " + totalDamageTaken);
             float damageReflected = percentageSecond * totalDamageTaken;
             int totalDamageToGive = Math.round(firstDamage) + Math.round(damageReflected);
             // apply damage to enemy
+            System.out.println("!WIZ: " + totalDamageToGive);
             knight.reduceHP(totalDamageToGive);
-        }
+//        }
     }
 
     /**
@@ -172,11 +184,6 @@ public class Wizard extends Champion {
         }
         int totalDamageTaken = Math.round(dmgTakenFirst) + Math.round(dmgTakenSecond);
         float reflectedDamage;
-//        if (totalDamageTaken >= getHP()) {
-//            reflectedDamage = percentageSecond * getHP();
-//        } else {
-//            reflectedDamage = percentageSecond * totalDamageTaken;
-//        }
         reflectedDamage = percentageSecond * totalDamageTaken;
         // apply damage to enemy
         int totalDamageToGive = Math.round(firstDamage) + Math.round(reflectedDamage);

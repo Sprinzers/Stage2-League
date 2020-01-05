@@ -1,6 +1,9 @@
 package angel;
 
-import champion.*;
+import champion.Knight;
+import champion.Pyromancer;
+import champion.Rogue;
+import champion.Wizard;
 
 import java.io.IOException;
 

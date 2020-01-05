@@ -1,6 +1,10 @@
 package angel;
 
-import champion.*;
+import champion.Champion;
+import champion.Knight;
+import champion.Pyromancer;
+import champion.Rogue;
+import champion.Wizard;
 import util.Constants;
 
 import java.io.IOException;
@@ -12,6 +16,11 @@ public class Spawner extends Angel {
         setPosY(posY);
     }
 
+    /**
+     *  Method is used to notify the observer when a champion is revived by an angel.
+     * @param champion
+     * @throws IOException
+     */
     public void notifyRevive(final Champion champion) throws IOException {
         getObserver().updateRevive(champion);
     }
@@ -24,7 +33,6 @@ public class Spawner extends Angel {
     public void applyEffect(final Knight knight) throws IOException {
         if (!knight.isAlive()) {
             knight.setHP(Constants.HP_MOD_200);
-//            knight.setXP();
             notifyHelp(knight);
             notifyRevive(knight);
         }
@@ -37,7 +45,6 @@ public class Spawner extends Angel {
     public void applyEffect(final Pyromancer pyromancer) throws IOException {
         if (!pyromancer.isAlive()) {
             pyromancer.setHP(Constants.HP_MOD_150);
-//            pyromancer.setXP();
             notifyHelp(pyromancer);
             notifyRevive(pyromancer);
         }
@@ -50,7 +57,6 @@ public class Spawner extends Angel {
     public void applyEffect(final Rogue rogue) throws IOException {
         if (!rogue.isAlive()) {
             rogue.setHP(Constants.HP_MOD_180);
-//            rogue.setXP();
             notifyHelp(rogue);
             notifyRevive(rogue);
         }
@@ -63,7 +69,6 @@ public class Spawner extends Angel {
     public void applyEffect(final Wizard wizard) throws IOException {
         if (!wizard.isAlive()) {
             wizard.setHP(Constants.HP_MOD_120);
-//            wizard.setXP();
             notifyHelp(wizard);
             notifyRevive(wizard);
         }
