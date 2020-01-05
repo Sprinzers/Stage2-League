@@ -6,6 +6,8 @@ import strategy.SecondStrategyKnight;
 import strategy.StrategyKnight;
 import util.Constants;
 
+import java.io.IOException;
+
 public class Knight extends Champion {
 
     Knight(final int newPosX, final int newPosY) {
@@ -39,9 +41,30 @@ public class Knight extends Champion {
         setRaceModWizardSecond(Constants.MODIFIER_5_POS);
     }
 
+    public void increaseRaceMod(final float newRaceMod) {
+        setRaceModWizardFirst(getRaceModWizardFirst() + newRaceMod);
+        setRaceModWizardSecond(getRaceModWizardSecond() + newRaceMod);
+        setRaceModRogueFirst(getRaceModRogueFirst() + newRaceMod);
+        setRaceModRogueSecond(getRaceModRogueSecond() + newRaceMod);
+        setRaceModPyromancerFirst(getRaceModPyromancerFirst() + newRaceMod);
+        setRaceModPyromancerSecond(getRaceModPyromancerSecond() + newRaceMod);
+        setRaceModKnightSecond(getRaceModKnightSecond() + newRaceMod);
+    }
+
+    public void reduceRaceMod(final float newRaceMod) {
+        setRaceModWizardFirst(getRaceModWizardFirst() - newRaceMod);
+        setRaceModWizardSecond(getRaceModWizardSecond() - newRaceMod);
+        setRaceModRogueFirst(getRaceModRogueFirst() - newRaceMod);
+        setRaceModRogueSecond(getRaceModRogueSecond() - newRaceMod);
+        setRaceModPyromancerFirst(getRaceModPyromancerFirst() - newRaceMod);
+        setRaceModPyromancerSecond(getRaceModPyromancerSecond() - newRaceMod);
+        setRaceModKnightSecond(getRaceModKnightSecond() - newRaceMod);
+    }
+
     /**
      *  Method used to apply the right strategy.
      */
+    @Override
     public void applyStrategy() {
         StrategyKnight strategy;
 
@@ -218,7 +241,7 @@ public class Knight extends Champion {
      * @param angel angel that appeared on the same tile as the champion
      */
     @Override
-    public void effectAppliedBy(final Angel angel) {
+    public void effectAppliedBy(final Angel angel) throws IOException {
         angel.applyEffect(this);
     }
 }

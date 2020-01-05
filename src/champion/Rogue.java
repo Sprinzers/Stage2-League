@@ -6,6 +6,8 @@ import strategy.FirstStrategyRogue;
 import strategy.SecondStrategyRogue;
 import util.Constants;
 
+import java.io.IOException;
+
 public class Rogue extends Champion {
 
     Rogue(final int newPosX, final int newPosY) {
@@ -42,11 +44,12 @@ public class Rogue extends Champion {
     /**
      *  Method used to apply the right strategy.
      */
+    @Override
     public void applyStrategy() {
         StrategyRogue strategy;
 
-        int hpLow = calculateTeoreticalHP() / 3;
-        int hpHigh = calculateTeoreticalHP() / 2;
+        int hpLow = calculateTeoreticalHP() / 7;
+        int hpHigh = calculateTeoreticalHP() / 5;
         if (hpLow < getHP() && getHP() < hpHigh) {
             strategy = new FirstStrategyRogue();
             strategy.doStrategy(this);
@@ -241,7 +244,7 @@ public class Rogue extends Champion {
      * @param angel angel that appeared on the same tile as the champion
      */
     @Override
-    public void effectAppliedBy(final Angel angel) {
+    public void effectAppliedBy(final Angel angel) throws IOException {
         angel.applyEffect(this);
     }
 }

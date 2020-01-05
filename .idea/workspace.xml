@@ -2,22 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d1744bb-a182-47f5-9d34-9c307bf57dcb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Stage2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Stage2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/angel/Angel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/Angel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/angel/DamageAngel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/DamageAngel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/angel/DarkAngel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/DarkAngel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/angel/Dracula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/Dracula.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/angel/GoodBoy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/GoodBoy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/angel/LevelUpAngel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/LevelUpAngel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/angel/LifeGiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/LifeGiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/angel/SmallAngel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/SmallAngel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/angel/Spawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/Spawner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/angel/TheDoomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/TheDoomer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/angel/XPAngel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/angel/XPAngel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/champion/Champion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/champion/Champion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/champion/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/champion/Knight.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/champion/Pyromancer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/champion/Pyromancer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/champion/Rogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/champion/Rogue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/champion/Wizard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/champion/Wizard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/checker/checker.sh" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/input/GameInputLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/input/GameInputLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/test.out" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/test.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/observer/GreatMagician.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/observer/GreatMagician.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/observer/Observer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/observer/Observer.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,10 +48,11 @@
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../fileio_jar/FileIO.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/checker/checker/checkstyle/poo_checks.xml" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">

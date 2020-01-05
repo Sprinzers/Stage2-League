@@ -4,6 +4,7 @@ import angel.Angel;
 import observer.Observer;
 import util.Constants;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public abstract class Champion {
@@ -41,12 +42,17 @@ public abstract class Champion {
         observer = newObserver;
     }
 
-    public String notifyKill(Champion killer) {
-        return observer.updateKill(this, killer);
+    public void notifyKill(Champion killer) throws IOException {
+        observer.updateKill(this, killer);
     }
 
-    public final void increaseRaceMod(final float newRaceMod) {
+    public void notifyLevelUp() throws IOException {
+        observer.updateLevelUp(this);
+    }
+
+    public void increaseRaceMod(final float newRaceMod) {
         raceModWizardFirst += newRaceMod;
+        raceModWizardSecond += newRaceMod;
         raceModKnightFirst += newRaceMod;
         raceModKnightSecond += newRaceMod;
         raceModPyromancerFirst += newRaceMod;
@@ -55,8 +61,9 @@ public abstract class Champion {
         raceModRogueSecond += newRaceMod;
     }
 
-    public final void reduceRaceMod(final float newRaceMod) {
+    public void reduceRaceMod(final float newRaceMod) {
         raceModWizardFirst -= newRaceMod;
+        raceModWizardSecond -= newRaceMod;
         raceModKnightFirst -= newRaceMod;
         raceModKnightSecond -= newRaceMod;
         raceModPyromancerFirst -= newRaceMod;
@@ -97,9 +104,9 @@ public abstract class Champion {
     public String printFinalStats() {
         if (isAlive()) {
             return (getName() + " " + level + " " + xp + " " + hp + " "
-                    + posX + " " + posY);
+                    + posX + " " + posY + "\n");
         } else {
-            return (getName() + " dead");
+            return (getName() + " dead\n");
         }
     }
 
@@ -127,7 +134,7 @@ public abstract class Champion {
      * @param levelLoser level of the champion that died after the fight
      * @return true if the winner accumulated enough XP to level up, false if otherwise
      */
-    public boolean awardXP(final int levelLoser) {
+    public boolean awardXP(final int levelLoser) throws IOException {
         int levelDiff = getLevel() - levelLoser;
         int xpWinner = Math.max(0, Constants.XP_INDICATOR - levelDiff * Constants.XP_MULTIPLIER);
         xp += xpWinner;
@@ -135,6 +142,7 @@ public abstract class Champion {
         boolean leveledUp = false;
         while (xp >= calculateLevelUpLimit()) {
             ++level;
+            notifyLevelUp();
             leveledUp = true;
         }
         return leveledUp;
@@ -277,7 +285,7 @@ public abstract class Champion {
         return xp;
     }
 
-    final void setXP() {
+    public final void setXP() {
         xp = 0;
     }
 
@@ -474,6 +482,8 @@ public abstract class Champion {
         hp = hpStart + hpGrowth * level;
     }
 
+    public abstract void applyStrategy();
+
     public abstract void isAttackedBy(Champion champion);
 
     public abstract void attack(Knight knight);
@@ -484,5 +494,5 @@ public abstract class Champion {
 
     public abstract void attack(Wizard wizard);
 
-    public abstract void effectAppliedBy(Angel angel);
+    public abstract void effectAppliedBy(Angel angel) throws IOException;
 }

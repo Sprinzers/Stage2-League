@@ -6,6 +6,8 @@ import strategy.FirstStrategyPyromancer;
 import strategy.SecondStrategyPyromancer;
 import util.Constants;
 
+import java.io.IOException;
+
 public class Pyromancer extends Champion {
 
     Pyromancer(final int newPosX, final int newPosY) {
@@ -42,11 +44,12 @@ public class Pyromancer extends Champion {
     /**
      *  Method used to apply the right strategy.
      */
+    @Override
     public void applyStrategy() {
         StrategyPyromancer strategy;
 
-        int hpLow = calculateTeoreticalHP() / 3;
-        int hpHigh = calculateTeoreticalHP() / 2;
+        int hpLow = calculateTeoreticalHP() / 4;
+        int hpHigh = calculateTeoreticalHP() / 3;
         if (hpLow < getHP() && getHP() < hpHigh) {
             strategy = new FirstStrategyPyromancer();
             strategy.doStrategy(this);
@@ -194,7 +197,7 @@ public class Pyromancer extends Champion {
      * @param angel angel that appeared on the same tile as the champion
      */
     @Override
-    public void effectAppliedBy(final Angel angel) {
+    public void effectAppliedBy(final Angel angel) throws IOException {
         angel.applyEffect(this);
     }
 }

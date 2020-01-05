@@ -1,8 +1,12 @@
 package champion;
 
 import angel.Angel;
-import strategy.*;
+import strategy.FirstStrategyWizard;
+import strategy.SecondStrategyWizard;
+import strategy.StrategyWizard;
 import util.Constants;
+
+import java.io.IOException;
 
 public class Wizard extends Champion {
 
@@ -36,13 +40,34 @@ public class Wizard extends Champion {
         setRaceModWizardFirst(Constants.MODIFIER_5_POS);
     }
 
+    public void increaseRaceMod(final float newRaceMod) {
+        setRaceModWizardFirst(getRaceModWizardFirst() + newRaceMod);
+        setRaceModRogueFirst(getRaceModRogueFirst() + newRaceMod);
+        setRaceModRogueSecond(getRaceModRogueSecond() + newRaceMod);
+        setRaceModPyromancerFirst(getRaceModPyromancerFirst() + newRaceMod);
+        setRaceModPyromancerSecond(getRaceModPyromancerSecond() + newRaceMod);
+        setRaceModKnightFirst(getRaceModKnightFirst() + newRaceMod);
+        setRaceModKnightSecond(getRaceModKnightSecond() + newRaceMod);
+    }
+
+    public void reduceRaceMod(final float newRaceMod) {
+        setRaceModWizardFirst(getRaceModWizardFirst() - newRaceMod);
+        setRaceModRogueFirst(getRaceModRogueFirst() - newRaceMod);
+        setRaceModRogueSecond(getRaceModRogueSecond() - newRaceMod);
+        setRaceModPyromancerFirst(getRaceModPyromancerFirst() - newRaceMod);
+        setRaceModPyromancerSecond(getRaceModPyromancerSecond() - newRaceMod);
+        setRaceModKnightFirst(getRaceModKnightFirst() - newRaceMod);
+        setRaceModKnightSecond(getRaceModKnightSecond() - newRaceMod);
+    }
+
     /**
      *  Method used to apply the right strategy.
      */
+    @Override
     public void applyStrategy() {
         StrategyWizard strategy;
 
-        int hpLow = calculateTeoreticalHP() / 3;
+        int hpLow = calculateTeoreticalHP() / 4;
         int hpHigh = calculateTeoreticalHP() / 2;
         if (hpLow < getHP() && getHP() < hpHigh) {
             strategy = new FirstStrategyWizard();
@@ -146,7 +171,13 @@ public class Wizard extends Champion {
             dmgTakenSecond += dmgTakenSecond * pyromancer.getTerrainModifier();
         }
         int totalDamageTaken = Math.round(dmgTakenFirst) + Math.round(dmgTakenSecond);
-        float reflectedDamage = percentageSecond * totalDamageTaken;
+        float reflectedDamage;
+//        if (totalDamageTaken >= getHP()) {
+//            reflectedDamage = percentageSecond * getHP();
+//        } else {
+//            reflectedDamage = percentageSecond * totalDamageTaken;
+//        }
+        reflectedDamage = percentageSecond * totalDamageTaken;
         // apply damage to enemy
         int totalDamageToGive = Math.round(firstDamage) + Math.round(reflectedDamage);
         pyromancer.reduceHP(totalDamageToGive);
@@ -222,7 +253,7 @@ public class Wizard extends Champion {
      * @param angel angel that appeared on the same tile as the champion
      */
     @Override
-    public void effectAppliedBy(final Angel angel) {
+    public void effectAppliedBy(final Angel angel) throws IOException {
         angel.applyEffect(this);
     }
 }

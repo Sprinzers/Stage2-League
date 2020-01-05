@@ -6,6 +6,8 @@ import champion.Rogue;
 import champion.Wizard;
 import util.Constants;
 
+import java.io.IOException;
+
 public class SmallAngel extends Angel {
 
     public SmallAngel(final int posX, final int posY) {
@@ -17,7 +19,7 @@ public class SmallAngel extends Angel {
      * @param knight champion that the effects will be applied on.
      */
     @Override
-    public void applyEffect(final Knight knight) {
+    public void applyEffect(final Knight knight) throws IOException {
         if (knight.isAlive()) {
             knight.increaseRaceMod(Constants.DAMAGE_MOD_10);
             if (knight.getHP() + Constants.HP_MOD_10 > knight.calculateTeoreticalHP()) {
@@ -25,6 +27,7 @@ public class SmallAngel extends Angel {
             } else {
                 knight.addHP(Constants.HP_MOD_10);
             }
+            notifyHelp(knight);
         }
     }
     /**
@@ -32,7 +35,7 @@ public class SmallAngel extends Angel {
      * @param pyromancer champion that the effects will be applied on.
      */
     @Override
-    public void applyEffect(final Pyromancer pyromancer) {
+    public void applyEffect(final Pyromancer pyromancer) throws IOException {
         if (pyromancer.isAlive()) {
             pyromancer.increaseRaceMod(Constants.DAMAGE_MOD_15);
             if (pyromancer.getHP() + Constants.HP_MOD_15 > pyromancer.calculateTeoreticalHP()) {
@@ -40,6 +43,7 @@ public class SmallAngel extends Angel {
             } else {
                 pyromancer.addHP(Constants.HP_MOD_15);
             }
+            notifyHelp(pyromancer);
         }
     }
     /**
@@ -47,7 +51,7 @@ public class SmallAngel extends Angel {
      * @param rogue champion that the effects will be applied on.
      */
     @Override
-    public void applyEffect(final Rogue rogue) {
+    public void applyEffect(final Rogue rogue) throws IOException {
         if (rogue.isAlive()) {
             rogue.increaseRaceMod(Constants.DAMAGE_MOD_5);
             if (rogue.getHP() + Constants.HP_MOD_20 > rogue.calculateTeoreticalHP()) {
@@ -55,6 +59,7 @@ public class SmallAngel extends Angel {
             } else {
                 rogue.addHP(Constants.HP_MOD_20);
             }
+            notifyHelp(rogue);
         }
     }
     /**
@@ -62,7 +67,7 @@ public class SmallAngel extends Angel {
      * @param wizard champion that the effects will be applied on.
      */
     @Override
-    public void applyEffect(final Wizard wizard) {
+    public void applyEffect(final Wizard wizard) throws IOException {
         if (wizard.isAlive()) {
             wizard.increaseRaceMod(Constants.DAMAGE_MOD_10);
             if (wizard.getHP() + Constants.HP_MOD_25 > wizard.calculateTeoreticalHP()) {
@@ -70,6 +75,7 @@ public class SmallAngel extends Angel {
             } else {
                 wizard.addHP(Constants.HP_MOD_25);
             }
+            notifyHelp(wizard);
         }
     }
 }

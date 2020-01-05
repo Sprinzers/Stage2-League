@@ -64,25 +64,4 @@ public class GameInputLoader {
             }
         return new GameInput(terrainTypes, championsOrder, roundsOrder, angelSpawn);
     }
-
-    public final void write(final ArrayList<Champion> champions,
-                            final ArrayList<String> notifications) {
-        try {
-            FileSystem fout = new FileSystem(inputPath, outputPath);
-
-            for (String notif : notifications) {
-                fout.writeWord(notif);
-            }
-
-            fout.writeWord("~~ Results ~~\n");
-            for (Champion currChampion : champions) {
-                fout.writeWord(currChampion.printFinalStats());
-                fout.writeNewLine();
-            }
-
-            fout.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

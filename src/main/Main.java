@@ -10,20 +10,24 @@ import game.TileMap;
 import input.GameInput;
 import input.GameInputLoader;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public final class Main {
     private Main() { }
-    public static void main(final String[] args) {
+    public static void main(final String[] args) throws IOException {
         GameInputLoader gameInputLoader = new GameInputLoader(args[0], args[1]);
         GameInput gameInput = gameInputLoader.load();
+
+        FileWriter fileWriter = new FileWriter(args[1]);
 
         TileMap.generateMap(gameInput.getTerrainDescription());
         TileMap map = TileMap.getInstance();
 
         ArrayList<Champion> champions = new ArrayList<Champion>();
         ArrayList<String> notifications = new ArrayList<>();
-        GreatMagician greatMagician = GreatMagician.getInstance();
+        GreatMagician greatMagician = GreatMagician.getInstance(fileWriter);
 
         for (int i = 0; i < gameInput.getChampionsOrder().size(); ++i) {
             // place the champions at the initial position
@@ -55,13 +59,18 @@ public final class Main {
         // move all the champions
         for (int i = 0; i < gameInput.getRoundsOrder().size(); ++i) {
             int round = i + 1;
-            notifications.add("~~ Round " + round + " ~~\n");
+            fileWriter.write("~~ Round " + round + " ~~\n");
 
             for (int j = 0; j < gameInput.getRoundsOrder().get(i).length(); ++j) {
                 if (champions.get(j).isAlive() && !champions.get(j).isIncapacitated()) {
                     char move = gameInput.getRoundsOrder().get(i).charAt(j);
+//                    fileWriter.write(champions.get(j).getFullName() + champions.get(j).getID() + " " + champions.get(j).getHP());
+                    champions.get(j).applyStrategy();
+//                    fileWriter.write(champions.get(j).getFullName() + champions.get(j).getID() + " " + champions.get(j).getHP());
+
                     champions.get(j).makeMove(move);
                 }
+//                System.out.println(champions.get(j).getHP() + " " + champions.get(j).getFullName() + champions.get(j).getLevel() + " " + round);
             }
             // determine which champions have a terrain modifier active and apply DOT effects
             for (Champion currChampion : champions) {
@@ -87,20 +96,24 @@ public final class Main {
                             int levelSecondChampion = opponent.getLevel();
                             // give XP and level up
                             if (!currChampion.isAlive() && opponent.isAlive()) {
+                                currChampion.notifyKill(opponent);
                                 if (opponent.awardXP(levelFirstChampion)) {
                                     opponent.restoreHP();
                                 }
-                                notifications.add(currChampion.notifyKill(opponent));
 
                             } else if (currChampion.isAlive() && !opponent.isAlive()) {
+                                opponent.notifyKill(currChampion);
                                 if (currChampion.awardXP(levelSecondChampion)) {
                                     currChampion.restoreHP();
                                 }
-                                notifications.add(opponent.notifyKill(currChampion));
 
                             } else if (!currChampion.isAlive() && !opponent.isAlive()) {
-                                currChampion.awardXP(levelSecondChampion);
-                                opponent.awardXP(levelFirstChampion);
+                                opponent.notifyKill(currChampion);
+                                currChampion.notifyKill(opponent);
+//                                currChampion.awardXP(levelSecondChampion);
+//                                opponent.awardXP(levelFirstChampion);
+                                opponent.setXP();
+                                currChampion.setXP();
                             }
                         }
                     }
@@ -113,15 +126,22 @@ public final class Main {
             }
 
             for (int j = 0; j < angels.get(i).size(); ++j) {
-                notifications.add(angels.get(i).get(j).spawnAngel());
-            }
-            notifications.add("\n");
 
-//            for (Champion champion : champions) {
-//                System.out.println(champion.getFullName() + " " + champion.getID() + " " + champion.getHP() + " " + champion.isAlive());
-//            }
-//            System.out.println();
+                angels.get(i).get(j).spawnAngel();
+                for (Champion champion : champions) {
+                    if (angels.get(i).get(j).verifyChampionPosition(champion)) {
+                        champion.effectAppliedBy(angels.get(i).get(j));
+//                        System.out.println(champion.getFullName() + " " + champion.getHP());
+                    }
+                }
+            }
+
+            fileWriter.write("\n");
         }
-        gameInputLoader.write(champions, notifications);
+        fileWriter.write("~~ Results ~~\n");
+        for (Champion champion : champions) {
+            fileWriter.write(champion.printFinalStats());
+        }
+        fileWriter.close();
     }
 }

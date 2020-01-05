@@ -3,29 +3,63 @@ package observer;
 import angel.Angel;
 import champion.Champion;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class GreatMagician extends Observer {
     private static GreatMagician instance = null;
+    private FileWriter fileWriter;
 
-    private GreatMagician() {
-
+    private GreatMagician(FileWriter fileWriter) {
+        this.fileWriter = fileWriter;
     }
 
-    public static GreatMagician getInstance() {
+    public static GreatMagician getInstance(FileWriter fileWriter) {
         if (instance == null) {
-            instance = new GreatMagician();
+            instance = new GreatMagician(fileWriter);
         }
         return instance;
     }
 
     @Override
-    public String updateKill(final Champion victim, final Champion killer) {
-        return "Player " + victim.getFullName() + " " + victim.getID() +  " was killed by "
-                + killer.getFullName() + " " + killer.getID() + "\n";
+    public void updateKill(final Champion victim, final Champion killer) throws IOException {
+        fileWriter.write("Player " + victim.getFullName() + " " + victim.getID()
+                +  " was killed by " + killer.getFullName() + " " + killer.getID() + "\n");
     }
 
     @Override
-    public String updateSpawn(final Angel angel) {
-        return "Angel " + angel.getName() + " was spawned at " + angel.getPosX() + " "
-                + angel.getPosY() + "\n";
+    public void updateSpawn(final Angel angel) throws IOException {
+        fileWriter.write("Angel " + angel.getName() + " was spawned at " + angel.getPosX()
+                + " " + angel.getPosY() + "\n");
+    }
+
+    @Override
+    public void updateHit(Angel angel, Champion champion) throws IOException {
+        fileWriter.write(angel.getName() + " hit " + champion.getFullName() + " "
+                + champion.getID() + "\n");
+    }
+
+    @Override
+    public void updateHelp(Angel angel, Champion champion) throws IOException {
+        fileWriter.write(angel.getName() + " helped " + champion.getFullName() + " "
+                + champion.getID() + "\n");
+    }
+
+    @Override
+    public void updateRevive(Champion champion) throws IOException {
+        fileWriter.write("Player " + champion.getFullName() + " " + champion.getID()
+                + " was brought to life by an angel\n");
+    }
+
+    @Override
+    public void updateLevelUp(final Champion champion) throws IOException {
+        fileWriter.write(champion.getFullName() + " " + champion.getID() + " reached level "
+                + champion.getLevel() + "\n");
+    }
+
+    @Override
+    public void updateKillByAgel(Champion champion) throws IOException {
+        fileWriter.write("Player " + champion.getFullName() + " " + champion.getID()
+                + " was killed by an angel\n");
     }
 }

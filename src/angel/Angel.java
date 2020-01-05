@@ -1,10 +1,9 @@
 package angel;
 
-import champion.Knight;
-import champion.Pyromancer;
-import champion.Rogue;
-import champion.Wizard;
+import champion.*;
 import observer.Observer;
+
+import java.io.IOException;
 
 public abstract class Angel {
     private boolean spawned;
@@ -12,13 +11,36 @@ public abstract class Angel {
     private int posY;
     private Observer observer;
 
+    public boolean verifyChampionPosition(final Champion champion) {
+        if (champion.getPosX() == getPosX() && champion.getPosY() == getPosY()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public Observer getObserver() {
         return observer;
     }
 
-    public String notifySpawn() {
-        return observer.updateSpawn(this);
+    public void notifySpawn() throws IOException {
+        observer.updateSpawn(this);
+    }
+
+    public void notifyHit(final Champion champion) throws IOException {
+        observer.updateHit(this, champion);
+    }
+
+    public void notifyHelp(final Champion champion) throws IOException {
+        observer.updateHelp(this, champion);
+    }
+
+    public void notifyLevelUp(final Champion champion) throws IOException {
+        observer.updateLevelUp(champion);
+    }
+
+    public void notifyKill(final Champion champion) throws IOException {
+        observer.updateKillByAgel(champion);
     }
 
     public void addObserver(Observer newObserver) {
@@ -29,9 +51,9 @@ public abstract class Angel {
         return spawned;
     }
 
-    public String spawnAngel() {
+    public void spawnAngel() throws IOException {
         spawned = true;
-        return notifySpawn();
+        notifySpawn();
     }
 
     public String getName() {
@@ -54,11 +76,11 @@ public abstract class Angel {
         this.posY = posY;
     }
 
-    public abstract void applyEffect(Knight knight);
+    public abstract void applyEffect(Knight knight) throws IOException;
 
-    public abstract void applyEffect(Pyromancer pyromancer);
+    public abstract void applyEffect(Pyromancer pyromancer) throws IOException;
 
-    public abstract void applyEffect(Rogue rogue);
+    public abstract void applyEffect(Rogue rogue) throws IOException;
 
-    public abstract void applyEffect(Wizard wizard);
+    public abstract void applyEffect(Wizard wizard) throws IOException;
 }
