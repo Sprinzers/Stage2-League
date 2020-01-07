@@ -6,8 +6,6 @@ import strategy.SecondStrategyKnight;
 import strategy.StrategyKnight;
 import util.Constants;
 
-import java.io.IOException;
-
 public class Knight extends Champion {
 
     Knight(final int newPosX, final int newPosY) {
@@ -26,7 +24,6 @@ public class Knight extends Champion {
         setFirstAbilityGrowth(Constants.KNIGHT_ABILITY_1_GROWTH);
         setSecondAbilityBase(Constants.KNIGHT_ABILITY_2_BASE);
         setSecondAbilityGrowth(Constants.KNIGHT_ABILITY_2_GROWTH);
-        setRoundCounter();
 
         setRaceModKnightFirst(Constants.MODIFIER_0);
         setRaceModKnightSecond(Constants.MODIFIER_20_POS);
@@ -76,8 +73,9 @@ public class Knight extends Champion {
     public void applyStrategy() {
         StrategyKnight strategy;
 
-        int hpLow = calculateTeoreticalHP() / Constants.KNIGHT_HP_LOW;
-        int hpHigh = calculateTeoreticalHP() / Constants.KNIGHT_HP_HIGH;
+        int hpLow = calculateTheoreticalHP() / Constants.KNIGHT_HP_LOW;
+        int hpHigh = calculateTheoreticalHP() / Constants.KNIGHT_HP_HIGH;
+
         if (hpLow < getHP() && getHP() < hpHigh) {
             strategy = new FirstStrategyKnight();
             strategy.doStrategy(this);
@@ -111,18 +109,21 @@ public class Knight extends Champion {
         if (executePercent > Constants.KNIGHT_HP_PERCENT_CAP) {
             executePercent = Constants.KNIGHT_HP_PERCENT_CAP;
         }
-        if (knight.getHP() < knight.calculateTeoreticalHP() * executePercent) {
+        if (knight.getHPBeforeRound() < knight.calculateTheoreticalHP() * executePercent) {
             knight.setHP(0);
             return;
         }
+
         // terrain modifier
         if (getApplyTerrainModifier()) {
             firstDamage += firstDamage * getTerrainModifier();
             secondDamage += secondDamage * getTerrainModifier();
         }
+
         // race modifier
         firstDamage *= getRaceModKnightFirst();
         secondDamage *= getRaceModKnightSecond();
+
         // DOT effects
         if (knight.getDamageOverTime().size() > 0) {
             knight.resetDamageOverTime();
@@ -148,18 +149,21 @@ public class Knight extends Champion {
         if (executePercent > Constants.KNIGHT_HP_PERCENT_CAP) {
             executePercent = Constants.KNIGHT_HP_PERCENT_CAP;
         }
-        if (pyromancer.getHP() < pyromancer.calculateTeoreticalHP() * executePercent) {
+        if (pyromancer.getHPBeforeRound() < pyromancer.calculateTheoreticalHP() * executePercent) {
             pyromancer.setHP(0);
             return;
         }
+
         // terrain modifier
         if (getApplyTerrainModifier()) {
             firstDamage += firstDamage * getTerrainModifier();
             secondDamage += secondDamage * getTerrainModifier();
         }
+
         // race modifier
         firstDamage *= getRaceModPyromancerFirst();
         secondDamage *= getRaceModPyromancerSecond();
+
         // DOT effects
         if (pyromancer.getDamageOverTime().size() > 0) {
             pyromancer.resetDamageOverTime();
@@ -185,18 +189,21 @@ public class Knight extends Champion {
         if (executePercent > Constants.KNIGHT_HP_PERCENT_CAP) {
             executePercent = Constants.KNIGHT_HP_PERCENT_CAP;
         }
-        if (rogue.getHP() < rogue.calculateTeoreticalHP() * executePercent) {
+        if (rogue.getHPBeforeRound() < rogue.calculateTheoreticalHP() * executePercent) {
             rogue.setHP(0);
             return;
         }
+
         // terrain modifier
         if (getApplyTerrainModifier()) {
             firstDamage += firstDamage * getTerrainModifier();
             secondDamage += secondDamage * getTerrainModifier();
         }
+
         // race modifier
         firstDamage *= getRaceModRogueFirst();
         secondDamage *= getRaceModRogueSecond();
+
         // DOT efects
         if (rogue.getDamageOverTime().size() > 0) {
             rogue.resetDamageOverTime();
@@ -222,18 +229,21 @@ public class Knight extends Champion {
         if (executePercent > Constants.KNIGHT_HP_PERCENT_CAP) {
             executePercent = Constants.KNIGHT_HP_PERCENT_CAP;
         }
-        if (wizard.getHP() <= wizard.calculateTeoreticalHP() * executePercent) {
+        if (wizard.getHP() <= wizard.calculateTheoreticalHP() * executePercent) {
             wizard.setHP(0);
             return;
         }
+
         // terrain modifier
         if (getApplyTerrainModifier()) {
             firstDamage += firstDamage * getTerrainModifier();
             secondDamage += secondDamage * getTerrainModifier();
         }
+
         // race modifier
         firstDamage *= getRaceModWizardFirst();
         secondDamage *= getRaceModWizardSecond();
+
         // DOT effects
         if (wizard.getDamageOverTime().size() > 0) {
             wizard.resetDamageOverTime();
@@ -241,7 +251,6 @@ public class Knight extends Champion {
         wizard.setIncapacitated(Constants.KNIGHT_INCAPACITATION_ROUNDS);
         // apply damage to enemy
         int totalDamage = Math.round(firstDamage) + Math.round(secondDamage);
-        System.out.println("!!KNIGHT: " + totalDamage);
         wizard.reduceHP(totalDamage);
     }
 
@@ -250,7 +259,7 @@ public class Knight extends Champion {
      * @param angel angel that appeared on the same tile as the champion
      */
     @Override
-    public void effectAppliedBy(final Angel angel) throws IOException {
+    public void effectAppliedBy(final Angel angel) {
         angel.applyEffect(this);
     }
 }

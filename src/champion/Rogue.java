@@ -6,9 +6,8 @@ import strategy.FirstStrategyRogue;
 import strategy.SecondStrategyRogue;
 import util.Constants;
 
-import java.io.IOException;
-
 public class Rogue extends Champion {
+    private int stabCount;
 
     Rogue(final int newPosX, final int newPosY) {
         setPosX(newPosX);
@@ -26,7 +25,6 @@ public class Rogue extends Champion {
         setFirstAbilityGrowth(Constants.ROGUE_ABILITY_1_GROWTH);
         setSecondAbilityBase(Constants.ROGUE_ABILITY_2_BASE);
         setSecondAbilityGrowth(Constants.ROGUE_ABILITY_2_GROWTH);
-        setRoundCounter();
 
         setRaceModKnightFirst(Constants.MODIFIER_10_NEG);
         setRaceModKnightSecond(Constants.MODIFIER_20_NEG);
@@ -41,6 +39,18 @@ public class Rogue extends Champion {
         setRaceModWizardSecond(Constants.MODIFIER_25_POS);
     }
 
+    final int getStabCount() {
+        return stabCount;
+    }
+
+    final void setStabCount() {
+        stabCount = 0;
+    }
+
+    private void increaseStabCount() {
+        ++stabCount;
+    }
+
     /**
      *  Method used to apply the right strategy.
      */
@@ -48,8 +58,8 @@ public class Rogue extends Champion {
     public void applyStrategy() {
         StrategyRogue strategy;
 
-        int hpLow = calculateTeoreticalHP() / Constants.ROGUE_HP_LOW;
-        int hpHigh = calculateTeoreticalHP() / Constants.ROGUE_HP_HIGH;
+        int hpLow = calculateTheoreticalHP() / Constants.ROGUE_HP_LOW;
+        int hpHigh = calculateTheoreticalHP() / Constants.ROGUE_HP_HIGH;
         if (hpLow < getHP() && getHP() < hpHigh) {
             strategy = new FirstStrategyRogue();
             strategy.doStrategy(this);
@@ -108,13 +118,15 @@ public class Rogue extends Champion {
         float firstDamage = firstAbility();
         float secondDamage = secondAbility();
         // apply critical hit
-        if (getRoundCounter() % Constants.ROGUE_CRITICAL_HIT_CHANCE == 0) {
+        if (getStabCount() % Constants.ROGUE_CRITICAL_HIT_CHANCE == 0) {
             if (getApplyTerrainModifier()) {
                 firstDamage *= Constants.ROGUE_CRITICAL_HIT_MULTIPLIER;
             } else {
-                setRoundCounter();
+                setStabCount();
             }
         }
+        increaseStabCount();
+
         // terrain modifier
         if (getApplyTerrainModifier()) {
             firstDamage += firstDamage * getTerrainModifier();
@@ -123,9 +135,11 @@ public class Rogue extends Champion {
         } else {
             knight.setIncapacitated(Constants.ROGUE_OVERTIME_ROUNDS);
         }
+
         // race modifier
         firstDamage *= getRaceModKnightFirst();
         secondDamage *= getRaceModKnightSecond();
+
         // DOT effects
         if (knight.getDamageOverTime().size() > 0) {
             knight.resetDamageOverTime();
@@ -151,13 +165,15 @@ public class Rogue extends Champion {
         float firstDamage = firstAbility();
         float secondDamage = secondAbility();
         // apply critical hit
-        if (getRoundCounter() % Constants.ROGUE_CRITICAL_HIT_CHANCE == 0) {
+        if (getStabCount() % Constants.ROGUE_CRITICAL_HIT_CHANCE == 0) {
             if (getApplyTerrainModifier()) {
                 firstDamage *= Constants.ROGUE_CRITICAL_HIT_MULTIPLIER;
             } else {
-                setRoundCounter();
+                setStabCount();
             }
         }
+        increaseStabCount();
+
         // terrain modifier
         if (getApplyTerrainModifier()) {
             firstDamage += firstDamage * getTerrainModifier();
@@ -166,9 +182,11 @@ public class Rogue extends Champion {
         } else {
             pyromancer.setIncapacitated(Constants.ROGUE_OVERTIME_ROUNDS);
         }
+
         // race modifier
         firstDamage *= getRaceModPyromancerFirst();
         secondDamage *= getRaceModPyromancerSecond();
+
         // DOT effects
         if (pyromancer.getDamageOverTime().size() > 0) {
             pyromancer.resetDamageOverTime();
@@ -194,13 +212,15 @@ public class Rogue extends Champion {
         float firstDamage = firstAbility();
         float secondDamage = secondAbility();
         // apply critical hit
-        if (getRoundCounter() % Constants.ROGUE_CRITICAL_HIT_CHANCE == 0) {
+        if (getStabCount() % Constants.ROGUE_CRITICAL_HIT_CHANCE == 0) {
             if (getApplyTerrainModifier()) {
                 firstDamage *= Constants.ROGUE_CRITICAL_HIT_MULTIPLIER;
             } else {
-                setRoundCounter();
+                setStabCount();
             }
         }
+        increaseStabCount();
+
         // terrain modifier
         if (getApplyTerrainModifier()) {
             firstDamage += firstDamage * getTerrainModifier();
@@ -209,9 +229,11 @@ public class Rogue extends Champion {
         } else {
             rogue.setIncapacitated(Constants.ROGUE_OVERTIME_ROUNDS);
         }
+
         // race modifier
         firstDamage *= getRaceModRogueFirst();
         secondDamage *= getRaceModRogueSecond();
+
         // DOT effects
         if (rogue.getDamageOverTime().size() > 0) {
             rogue.resetDamageOverTime();
@@ -237,13 +259,15 @@ public class Rogue extends Champion {
         float firstDamage = firstAbility();
         float secondDamage = secondAbility();
         // apply critical hit
-        if (getRoundCounter() % Constants.ROGUE_CRITICAL_HIT_CHANCE == 0) {
+        if (getStabCount() % Constants.ROGUE_CRITICAL_HIT_CHANCE == 0) {
             if (getApplyTerrainModifier()) {
                 firstDamage *= Constants.ROGUE_CRITICAL_HIT_MULTIPLIER;
             } else {
-                setRoundCounter();
+                setStabCount();
             }
         }
+        increaseStabCount();
+
         // terrain modifier
         if (getApplyTerrainModifier()) {
             firstDamage += firstDamage * getTerrainModifier();
@@ -252,9 +276,11 @@ public class Rogue extends Champion {
         } else {
             wizard.setIncapacitated(Constants.ROGUE_OVERTIME_ROUNDS);
         }
+
         // race modifier
         firstDamage *= getRaceModWizardFirst();
-        secondDamage *= getRaceModWizardSecond();
+        secondDamage *= (getRaceModWizardSecond() - Constants.FLOAT_PRECISION);
+
         // DOT efects
         if (wizard.getDamageOverTime().size() > 0) {
             wizard.resetDamageOverTime();
@@ -274,7 +300,7 @@ public class Rogue extends Champion {
      * @param angel angel that appeared on the same tile as the champion
      */
     @Override
-    public void effectAppliedBy(final Angel angel) throws IOException {
+    public void effectAppliedBy(final Angel angel) {
         angel.applyEffect(this);
     }
 }

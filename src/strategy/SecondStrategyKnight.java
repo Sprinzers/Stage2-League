@@ -13,8 +13,8 @@ public class SecondStrategyKnight implements StrategyKnight {
     public void doStrategy(final Knight knight) {
         knight.reduceRaceMod(Constants.DAMAGE_MOD_20);
         int hpAddition = knight.getHP() / Constants.KNIGHT_DEFENSIVE;
-        if (knight.getHP() + hpAddition > knight.calculateTeoreticalHP()) {
-            knight.setHP(knight.calculateTeoreticalHP());
+        if (knight.getHP() + hpAddition > knight.calculateTheoreticalHP()) {
+            knight.setHP(knight.calculateTheoreticalHP());
         } else {
             knight.addHP(hpAddition);
         }

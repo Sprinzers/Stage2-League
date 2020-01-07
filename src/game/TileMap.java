@@ -31,7 +31,7 @@ public final class TileMap {
      *  Method is used to add one created line to the map.
      * @param mapLine newly created line that is added to the map
      */
-    public void addMapLine(final ArrayList<Tile> mapLine) {
+    private void addMapLine(final ArrayList<Tile> mapLine) {
         map.add(mapLine);
     }
 

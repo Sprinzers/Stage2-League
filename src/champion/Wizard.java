@@ -6,8 +6,6 @@ import strategy.SecondStrategyWizard;
 import strategy.StrategyWizard;
 import util.Constants;
 
-import java.io.IOException;
-
 public class Wizard extends Champion {
 
     Wizard(final int newPosX, final int newPosY) {
@@ -26,7 +24,6 @@ public class Wizard extends Champion {
         setFirstAbilityGrowth(Constants.WIZARD_ABILITY_1_GROWTH);
         setSecondAbilityBase(Constants.WIZARD_ABILITY_2_BASE);
         setSecondAbilityGrowth(Constants.WIZARD_ABILITY_2_GROWTH);
-        setRoundCounter();
 
         setRaceModKnightFirst(Constants.MODIFIER_20_POS);
         setRaceModKnightSecond(Constants.MODIFIER_40_POS);
@@ -75,10 +72,11 @@ public class Wizard extends Champion {
     public void applyStrategy() {
         StrategyWizard strategy;
 
-        int hpLow = calculateTeoreticalHP() / Constants.WIZARD_HP_LOW;
-        int hpHigh = calculateTeoreticalHP() / Constants.WIZARD_HP_HIGH;
+        int hpLow = calculateTheoreticalHP() / Constants.WIZARD_HP_LOW;
+        int hpHigh = calculateTheoreticalHP() / Constants.WIZARD_HP_HIGH;
         if (hpLow < getHP() && getHP() < hpHigh) {
             strategy = new FirstStrategyWizard();
+//            System.out.println(getID() + "####");
             strategy.doStrategy(this);
         } else if (getHP() < hpLow) {
             strategy = new SecondStrategyWizard();
@@ -104,51 +102,37 @@ public class Wizard extends Champion {
         // base damage percentages
         float percentageFirst = firstAbility();
         float percentageSecond = secondAbility();
+
         // terrain modifier
         if (getApplyTerrainModifier()) {
             percentageFirst += percentageFirst * getTerrainModifier();
             percentageSecond += percentageSecond * getTerrainModifier();
         }
-        // race modifier
-        percentageFirst *= getRaceModKnightFirst();
-        percentageSecond *= getRaceModKnightSecond();
-        // damage to apply from first ability
-        float firstDamage = percentageFirst * Math.min(Constants.WIZARD_ABILITY_1_PERCENT
-                * knight.calculateTeoreticalHP(), knight.getHP());
-
         if (percentageSecond > Constants.WIZARD_ABILITY_2_CAP) {
             percentageSecond = Constants.WIZARD_ABILITY_2_CAP;
         }
+
+        // race modifier
+        percentageFirst *= getRaceModKnightFirst();
+        percentageSecond *= getRaceModKnightSecond();
+
+        // damage to apply from first ability
+        float firstDamage = percentageFirst * Math.min(Constants.WIZARD_ABILITY_1_PERCENT
+                * knight.calculateTheoreticalHP(), knight.getHP());
+
         // calculate taken damage
         float dmgTakenFirst = knight.firstAbility();
         float dmgTakenSecond = knight.secondAbility();
-        float executePercent = Constants.KNIGHT_HP_PERCENT_INITIAL
-                + Constants.KNIGHT_HP_PERCENT_GROWTH * knight.getLevel();
-        if (executePercent > Constants.KNIGHT_HP_PERCENT_CAP) {
-            executePercent = Constants.KNIGHT_HP_PERCENT_CAP;
+        if (knight.getApplyTerrainModifier()) {
+            dmgTakenFirst += dmgTakenFirst * knight.getTerrainModifier();
+            dmgTakenSecond += dmgTakenSecond * knight.getTerrainModifier();
         }
-//        if (this.getHPBeforeRound() <= this.calculateTeoreticalHP() * executePercent) {
-//            // wizard will die from execute
-//            int executeDamage = this.getHP();
-//            System.out.println("EXECUTE:" + executeDamage);
-//            float damageReflected = percentageSecond * executeDamage;
-//            // apply damage to enemy
-//            int totalDamageToGive = Math.round(firstDamage) + Math.round(damageReflected);
-//            System.out.println(totalDamageToGive);
-//            knight.reduceHP(totalDamageToGive);
-//        } else {
-            if (knight.getApplyTerrainModifier()) {
-                dmgTakenFirst += dmgTakenFirst * knight.getTerrainModifier();
-                dmgTakenSecond += dmgTakenSecond * knight.getTerrainModifier();
-            }
-            int totalDamageTaken = Math.round(dmgTakenFirst) + Math.round(dmgTakenSecond);
-            System.out.println("WIZ TAKEN DMG: " + totalDamageTaken);
-            float damageReflected = percentageSecond * totalDamageTaken;
-            int totalDamageToGive = Math.round(firstDamage) + Math.round(damageReflected);
-            // apply damage to enemy
-            System.out.println("!WIZ: " + totalDamageToGive);
-            knight.reduceHP(totalDamageToGive);
-//        }
+        int totalDamageTaken = Math.round(dmgTakenFirst) + Math.round(dmgTakenSecond);
+
+        float damageReflected = percentageSecond * totalDamageTaken;
+        int totalDamageToGive = Math.round(firstDamage) + Math.round(damageReflected);
+        // apply damage to enemy
+        knight.reduceHP(totalDamageToGive);
     }
 
     /**
@@ -160,21 +144,25 @@ public class Wizard extends Champion {
         // base damages
         float percentageFirst = firstAbility();
         float percentageSecond = secondAbility();
+
         // terrain modifier
         if (getApplyTerrainModifier()) {
             percentageFirst += percentageFirst * getTerrainModifier();
             percentageSecond += percentageSecond * getTerrainModifier();
         }
+
         // race modifier
         percentageFirst *= getRaceModPyromancerFirst();
         percentageSecond *= getRaceModPyromancerSecond();
+
         // damage to apply from first ability
         float firstDamage = percentageFirst * Math.min(Constants.WIZARD_ABILITY_1_PERCENT
-                * pyromancer.calculateTeoreticalHP(), pyromancer.getHP());
+                * pyromancer.calculateTheoreticalHP(), pyromancer.getHP());
 
         if (percentageSecond > Constants.WIZARD_ABILITY_2_CAP) {
             percentageSecond = Constants.WIZARD_ABILITY_2_CAP;
         }
+
         // calculate taken damage
         float dmgTakenFirst = pyromancer.firstAbility();
         float dmgTakenSecond = pyromancer.secondAbility();
@@ -183,8 +171,7 @@ public class Wizard extends Champion {
             dmgTakenSecond += dmgTakenSecond * pyromancer.getTerrainModifier();
         }
         int totalDamageTaken = Math.round(dmgTakenFirst) + Math.round(dmgTakenSecond);
-        float reflectedDamage;
-        reflectedDamage = percentageSecond * totalDamageTaken;
+        float reflectedDamage = percentageSecond * totalDamageTaken;
         // apply damage to enemy
         int totalDamageToGive = Math.round(firstDamage) + Math.round(reflectedDamage);
         pyromancer.reduceHP(totalDamageToGive);
@@ -199,29 +186,40 @@ public class Wizard extends Champion {
         // base damages
         float percentageFirst = firstAbility();
         float percentageSecond = secondAbility();
+
         // terrain modifier
         if (getApplyTerrainModifier()) {
             percentageFirst += percentageFirst * getTerrainModifier();
             percentageSecond += percentageSecond * getTerrainModifier();
         }
+
         // race modifier
         percentageFirst *= getRaceModRogueFirst();
         percentageSecond *= getRaceModRogueSecond();
+
         // damage to apply from first ability
         float firstDamage = percentageFirst * Math.min(Constants.WIZARD_ABILITY_1_PERCENT
-                * rogue.calculateTeoreticalHP(), rogue.getHP());
+                * rogue.calculateTheoreticalHP(), rogue.getHP());
 
         if (percentageSecond > Constants.WIZARD_ABILITY_2_CAP) {
             percentageSecond = Constants.WIZARD_ABILITY_2_CAP;
         }
+
         // calculate taken damage
         float dmgTakenFirst = rogue.firstAbility();
         float dmgTakenSecond = rogue.secondAbility();
-        if (rogue.getRoundCounter() % Constants.ROGUE_CRITICAL_HIT_CHANCE == 0) {
+        // calculate stab with or without critical hit
+        int stabCount;
+        if (rogue.getFoughtThisRound()) {
+            stabCount = rogue.getStabCount() - 1;
+        } else {
+            stabCount = rogue.getStabCount();
+        }
+        if (stabCount % Constants.ROGUE_CRITICAL_HIT_CHANCE == 0) {
             if (rogue.getApplyTerrainModifier()) {
                 dmgTakenFirst *= Constants.ROGUE_CRITICAL_HIT_MULTIPLIER;
             } else {
-                rogue.setRoundCounter();
+                rogue.setStabCount();
             }
         }
         if (rogue.getApplyTerrainModifier()) {
@@ -243,15 +241,17 @@ public class Wizard extends Champion {
     public void attack(final Wizard wizard) {
         // base damage
         float percentageFirst = firstAbility();
+
         // terrain modifier
         if (getApplyTerrainModifier()) {
             percentageFirst += percentageFirst * getTerrainModifier();
         }
+
         // race modifier
-        percentageFirst *= getRaceModWizardFirst();
+        percentageFirst *= (getRaceModWizardFirst() - Constants.FLOAT_PRECISION);
 
         int damageToGive = Math.round(percentageFirst * Math.min(Constants.WIZARD_ABILITY_1_PERCENT
-                * wizard.calculateTeoreticalHP(), wizard.getHP()));
+                * wizard.calculateTheoreticalHP(), wizard.getHP()));
         // apply damage to enemy
         wizard.reduceHP(damageToGive);
     }
@@ -260,7 +260,7 @@ public class Wizard extends Champion {
      * @param angel angel that appeared on the same tile as the champion
      */
     @Override
-    public void effectAppliedBy(final Angel angel) throws IOException {
+    public void effectAppliedBy(final Angel angel) {
         angel.applyEffect(this);
     }
 }

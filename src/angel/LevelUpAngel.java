@@ -6,7 +6,6 @@ import champion.Rogue;
 import champion.Wizard;
 import util.Constants;
 
-import java.io.IOException;
 
 public class LevelUpAngel extends Angel {
 
@@ -14,12 +13,13 @@ public class LevelUpAngel extends Angel {
         setPosX(posX);
         setPosY(posY);
     }
+
     /**
      *  Method describes the effects of the angel.
      * @param knight champion that the effects will be applied on.
      */
     @Override
-    public void applyEffect(final Knight knight) throws IOException {
+    public void applyEffect(final Knight knight) {
         if (knight.isAlive()) {
             int levelUpLimit = knight.calculateLevelUpLimit();
             knight.addXP(levelUpLimit - knight.getXP());
@@ -27,15 +27,16 @@ public class LevelUpAngel extends Angel {
             knight.increaseRaceMod(Constants.DAMAGE_MOD_10);
             notifyHelp(knight);
             notifyLevelUp(knight);
-            knight.setHP(knight.calculateTeoreticalHP());
+            knight.setHP(knight.calculateTheoreticalHP());
         }
     }
+
     /**
      *  Method describes the effects of the angel.
      * @param pyromancer champion that the effects will be applied on.
      */
     @Override
-    public void applyEffect(final Pyromancer pyromancer) throws IOException {
+    public void applyEffect(final Pyromancer pyromancer) {
         if (pyromancer.isAlive()) {
             int levelUpLimit = pyromancer.calculateLevelUpLimit();
             pyromancer.addXP(levelUpLimit - pyromancer.getXP());
@@ -43,15 +44,16 @@ public class LevelUpAngel extends Angel {
             pyromancer.increaseRaceMod(Constants.DAMAGE_MOD_20);
             notifyHelp(pyromancer);
             notifyLevelUp(pyromancer);
-            pyromancer.setHP(pyromancer.calculateTeoreticalHP());
+            pyromancer.setHP(pyromancer.calculateTheoreticalHP());
         }
     }
+
     /**
      *  Method describes the effects of the angel.
      * @param rogue champion that the effects will be applied on.
      */
     @Override
-    public void applyEffect(final Rogue rogue) throws IOException {
+    public void applyEffect(final Rogue rogue) {
         if (rogue.isAlive()) {
             int levelUpLimit = rogue.calculateLevelUpLimit();
             rogue.addXP(levelUpLimit - rogue.getXP());
@@ -59,15 +61,16 @@ public class LevelUpAngel extends Angel {
             rogue.increaseRaceMod(Constants.DAMAGE_MOD_15);
             notifyHelp(rogue);
             notifyLevelUp(rogue);
-            rogue.setHP(rogue.calculateTeoreticalHP());
+            rogue.setHP(rogue.calculateTheoreticalHP());
         }
     }
+
     /**
      *  Method describes the effects of the angel.
      * @param wizard champion that the effects will be applied on.
      */
     @Override
-    public void applyEffect(final Wizard wizard) throws IOException {
+    public void applyEffect(final Wizard wizard) {
         if (wizard.isAlive()) {
             int levelUpLimit = wizard.calculateLevelUpLimit();
             wizard.addXP(levelUpLimit - wizard.getXP());
@@ -75,7 +78,7 @@ public class LevelUpAngel extends Angel {
             wizard.increaseRaceMod(Constants.DAMAGE_MOD_25);
             notifyHelp(wizard);
             notifyLevelUp(wizard);
-            wizard.setHP(wizard.calculateTeoreticalHP());
+            wizard.setHP(wizard.calculateTheoreticalHP());
         }
     }
 }

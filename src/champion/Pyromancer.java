@@ -6,8 +6,6 @@ import strategy.FirstStrategyPyromancer;
 import strategy.SecondStrategyPyromancer;
 import util.Constants;
 
-import java.io.IOException;
-
 public class Pyromancer extends Champion {
 
     Pyromancer(final int newPosX, final int newPosY) {
@@ -26,7 +24,6 @@ public class Pyromancer extends Champion {
         setFirstAbilityGrowth(Constants.PYRO_ABILITY_1_GROWTH);
         setSecondAbilityBase(Constants.PYRO_ABILITY_2_BASE);
         setSecondAbilityGrowth(Constants.PYRO_ABILITY_2_GROWTH);
-        setRoundCounter();
 
         setRaceModKnightFirst(Constants.MODIFIER_20_POS);
         setRaceModKnightSecond(Constants.MODIFIER_20_POS);
@@ -48,8 +45,8 @@ public class Pyromancer extends Champion {
     public void applyStrategy() {
         StrategyPyromancer strategy;
 
-        int hpLow = calculateTeoreticalHP() / Constants.PYROMANCER_HP_LOW;
-        int hpHigh = calculateTeoreticalHP() / Constants.PYROMANCER_HP_HIGH;
+        int hpLow = calculateTheoreticalHP() / Constants.PYROMANCER_HP_LOW;
+        int hpHigh = calculateTheoreticalHP() / Constants.PYROMANCER_HP_HIGH;
         if (hpLow < getHP() && getHP() < hpHigh) {
             strategy = new FirstStrategyPyromancer();
             strategy.doStrategy(this);
@@ -108,15 +105,18 @@ public class Pyromancer extends Champion {
         float firstDamage = firstAbility();
         float secondDamage = secondAbility();
         float overTime = Constants.PYRO_OVERTIME_BASE + Constants.PYRO_OVERTIME_GROWTH * getLevel();
+
         // terrain modifier
         if (getApplyTerrainModifier()) {
             firstDamage += firstDamage * getTerrainModifier();
             secondDamage += secondDamage * getTerrainModifier();
             overTime += overTime * getTerrainModifier();
         }
+
         // race modifier
         firstDamage *= getRaceModKnightFirst();
         secondDamage *= getRaceModKnightSecond();
+
         // DOT effects
         overTime *= getRaceModKnightSecond();
         int overTimeDamage = Math.round(overTime);
@@ -139,15 +139,18 @@ public class Pyromancer extends Champion {
         float firstDamage = firstAbility();
         float secondDamage = secondAbility();
         float overTime = Constants.PYRO_OVERTIME_BASE + Constants.PYRO_OVERTIME_GROWTH * getLevel();
+
         // terrain modifier
         if (getApplyTerrainModifier()) {
             firstDamage += firstDamage * getTerrainModifier();
             secondDamage += secondDamage * getTerrainModifier();
             overTime += overTime * getTerrainModifier();
         }
+
         // race modifier
         firstDamage *= getRaceModPyromancerFirst();
         secondDamage *= getRaceModPyromancerSecond();
+
         // DOT effects
         overTime *= getRaceModPyromancerSecond();
         int overTimeDamage = Math.round(overTime);
@@ -170,15 +173,18 @@ public class Pyromancer extends Champion {
         float firstDamage = firstAbility();
         float secondDamage = secondAbility();
         float overTime = Constants.PYRO_OVERTIME_BASE + Constants.PYRO_OVERTIME_GROWTH * getLevel();
+
         // terrain modifier
         if (getApplyTerrainModifier()) {
             firstDamage += firstDamage * getTerrainModifier();
             secondDamage += secondDamage * getTerrainModifier();
             overTime += overTime * getTerrainModifier();
         }
+
         // race modifier
         firstDamage *= getRaceModRogueFirst();
         secondDamage *= getRaceModRogueSecond();
+
         // DOT effects
         overTime *= getRaceModRogueSecond();
         int overTimeDamage = Math.round(overTime);
@@ -201,6 +207,7 @@ public class Pyromancer extends Champion {
         float firstDamage = firstAbility();
         float secondDamage = secondAbility();
         float overTime = Constants.PYRO_OVERTIME_BASE + Constants.PYRO_OVERTIME_GROWTH * getLevel();
+
         // terrain modifier
         if (getApplyTerrainModifier()) {
             firstDamage += firstDamage * getTerrainModifier();
@@ -208,9 +215,11 @@ public class Pyromancer extends Champion {
             overTime += overTime * getTerrainModifier();
             overTime = Math.round(overTime);
         }
+
         // race modifier
         firstDamage *= getRaceModWizardFirst();
-        secondDamage *= getRaceModWizardSecond();
+        secondDamage *= (getRaceModWizardSecond() - Constants.FLOAT_PRECISION);
+
         // DOT effects
         overTime *= getRaceModWizardSecond();
         int overTimeDamage = Math.round(overTime);
@@ -228,7 +237,7 @@ public class Pyromancer extends Champion {
      * @param angel angel that appeared on the same tile as the champion
      */
     @Override
-    public void effectAppliedBy(final Angel angel) throws IOException {
+    public void effectAppliedBy(final Angel angel) {
         angel.applyEffect(this);
     }
 }

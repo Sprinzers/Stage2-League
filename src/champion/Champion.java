@@ -4,7 +4,6 @@ import angel.Angel;
 import observer.Observer;
 import util.Constants;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public abstract class Champion {
@@ -13,6 +12,7 @@ public abstract class Champion {
     private int hp;
     private int hpStart;
     private int hpGrowth;
+    private int hpBeforeRound;
     private int xp;
     private int level;
     private boolean applyTerrainModifier;
@@ -26,8 +26,6 @@ public abstract class Champion {
     private float firstAbilityGrowth;
     private float secondAbilityBase;
     private float secondAbilityGrowth;
-    private int roundCounter;
-    private int hpBeforeRound;
     private float raceModWizardFirst;
     private float raceModWizardSecond;
     private float raceModKnightFirst;
@@ -48,17 +46,15 @@ public abstract class Champion {
     /**
      *  Method is used to notify the observer when a kill occurs.
      * @param killer champion that killed
-     * @throws IOException
      */
-    public void notifyKill(final Champion killer) throws IOException {
+    public void notifyKill(final Champion killer) {
         observer.updateKill(this, killer);
     }
 
     /**
      *  Method is used to notify the observer when the champion levels up.
-     * @throws IOException
      */
-    public void notifyLevelUp() throws IOException {
+    private void notifyLevelUp() {
         observer.updateLevelUp(this);
     }
 
@@ -99,6 +95,7 @@ public abstract class Champion {
             return (getName() + " dead\n");
         }
     }
+
     /**
      *  Method is used to determine if champion is a valid opponent.
      * @param champion opponent that "this" will fight
@@ -113,13 +110,14 @@ public abstract class Champion {
     public final int calculateLevelUpLimit() {
         return Constants.LEVEL_UP_XP + Constants.LEVEL_UP_XP_GROWTH * getLevel();
     }
+
     /**
      * Method is used to award XP to the winner after a fight and level him up, if
      * necessary.
      * @param levelLoser level of the champion that died after the fight
      * @return true if the winner accumulated enough XP to level up, false if otherwise
      */
-    public boolean awardXP(final int levelLoser) throws IOException {
+    public boolean awardXP(final int levelLoser) {
         int levelDiff = getLevel() - levelLoser;
         int xpWinner = Math.max(0, Constants.XP_INDICATOR - levelDiff * Constants.XP_MULTIPLIER);
         xp += xpWinner;
@@ -197,7 +195,7 @@ public abstract class Champion {
      *  Method is used to determine the maximum possible HP at a given point.
      * @return maximum possible HP
      */
-    public final int calculateTeoreticalHP() {
+    public final int calculateTheoreticalHP() {
         return hpStart + hpGrowth * level;
     }
     /**
@@ -216,16 +214,11 @@ public abstract class Champion {
         return damageOverTime;
     }
 
-    /**
-     *  Method is used to access the field that determines if the terrain modifier
-     *  should be active in a particular location.
-     * @return  true if the terrain modifier should be applied, false if otherwise
-     */
-    boolean getApplyTerrainModifier() {
+    final boolean getApplyTerrainModifier() {
         return applyTerrainModifier;
     }
 
-    private boolean getFoughtThisRound() {
+    final boolean getFoughtThisRound() {
         return foughtThisRound;
     }
 
@@ -242,20 +235,8 @@ public abstract class Champion {
      *  the champion is under the incapacitation effect.
      * @param incapacitated number of incapacitation rounds
      */
-    void setIncapacitated(final int incapacitated) {
+    final void setIncapacitated(final int incapacitated) {
         this.incapacitated = incapacitated;
-    }
-
-    final int getRoundCounter() {
-        return roundCounter;
-    }
-
-    final void setRoundCounter() {
-        roundCounter = 0;
-    }
-
-    public final void increaseRoundCounter() {
-        ++roundCounter;
     }
 
     public final void addXP(final int newXP) {
@@ -266,7 +247,7 @@ public abstract class Champion {
         return xp;
     }
 
-    public final void setXP() {
+    final void setXP() {
         xp = 0;
     }
 
@@ -358,67 +339,67 @@ public abstract class Champion {
         this.secondAbilityGrowth = secondAbilityGrowth;
     }
 
-    public final float getRaceModWizardFirst() {
+    final float getRaceModWizardFirst() {
         return raceModWizardFirst;
     }
 
-    public final void setRaceModWizardFirst(final float raceModWizardFirst) {
+    final void setRaceModWizardFirst(final float raceModWizardFirst) {
         this.raceModWizardFirst = raceModWizardFirst;
     }
 
-    public final float getRaceModWizardSecond() {
+    final float getRaceModWizardSecond() {
         return raceModWizardSecond;
     }
 
-    public final void setRaceModWizardSecond(final float raceModWizardSecond) {
+    final void setRaceModWizardSecond(final float raceModWizardSecond) {
         this.raceModWizardSecond = raceModWizardSecond;
     }
 
-    public final float getRaceModKnightFirst() {
+    final float getRaceModKnightFirst() {
         return raceModKnightFirst;
     }
 
-    public final void setRaceModKnightFirst(final float raceModKnightFirst) {
+    final void setRaceModKnightFirst(final float raceModKnightFirst) {
         this.raceModKnightFirst = raceModKnightFirst;
     }
 
-    public final float getRaceModKnightSecond() {
+    final float getRaceModKnightSecond() {
         return raceModKnightSecond;
     }
 
-    public final void setRaceModKnightSecond(final float raceModKnightSecond) {
+    final void setRaceModKnightSecond(final float raceModKnightSecond) {
         this.raceModKnightSecond = raceModKnightSecond;
     }
 
-    public final float getRaceModPyromancerFirst() {
+    final float getRaceModPyromancerFirst() {
         return raceModPyromancerFirst;
     }
 
-    public final void setRaceModPyromancerFirst(final float raceModPyromancerFirst) {
+    final void setRaceModPyromancerFirst(final float raceModPyromancerFirst) {
         this.raceModPyromancerFirst = raceModPyromancerFirst;
     }
 
-    public final float getRaceModPyromancerSecond() {
+    final float getRaceModPyromancerSecond() {
         return raceModPyromancerSecond;
     }
 
-    public final void setRaceModPyromancerSecond(final float raceModPyromancerSecond) {
+    final void setRaceModPyromancerSecond(final float raceModPyromancerSecond) {
         this.raceModPyromancerSecond = raceModPyromancerSecond;
     }
 
-    public final float getRaceModRogueFirst() {
+    final float getRaceModRogueFirst() {
         return raceModRogueFirst;
     }
 
-    public final void setRaceModRogueFirst(final float raceModRogueFirst) {
+    final void setRaceModRogueFirst(final float raceModRogueFirst) {
         this.raceModRogueFirst = raceModRogueFirst;
     }
 
-    public final float getRaceModRogueSecond() {
+    final float getRaceModRogueSecond() {
         return raceModRogueSecond;
     }
 
-    public final void setRaceModRogueSecond(final float raceModRogueSecond) {
+    final void setRaceModRogueSecond(final float raceModRogueSecond) {
         this.raceModRogueSecond = raceModRogueSecond;
     }
 
@@ -475,5 +456,5 @@ public abstract class Champion {
 
     public abstract void attack(Wizard wizard);
 
-    public abstract void effectAppliedBy(Angel angel) throws IOException;
+    public abstract void effectAppliedBy(Angel angel);
 }

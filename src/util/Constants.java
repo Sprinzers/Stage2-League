@@ -126,4 +126,5 @@ public final class Constants {
     public static final int ROGUE_HP_HIGH = 5;
     public static final int WIZARD_HP_LOW = 4;
     public static final int WIZARD_HP_HIGH = 2;
+    public static final float FLOAT_PRECISION = 0.00001f;
 }

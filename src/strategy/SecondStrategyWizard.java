@@ -12,8 +12,8 @@ public class SecondStrategyWizard implements StrategyWizard {
     public void doStrategy(final Wizard wizard) {
         wizard.reduceRaceMod(Constants.DAMAGE_MOD_20);
         int hpAddition = wizard.getHP() / Constants.WIZARD_DEFENSIVE;
-        if (wizard.getHP() + hpAddition > wizard.calculateTeoreticalHP()) {
-            wizard.setHP(wizard.calculateTeoreticalHP());
+        if (wizard.getHP() + hpAddition > wizard.calculateTheoreticalHP()) {
+            wizard.setHP(wizard.calculateTheoreticalHP());
         } else {
             wizard.addHP(hpAddition);
         }
