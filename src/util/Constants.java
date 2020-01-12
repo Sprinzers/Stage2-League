@@ -15,13 +15,8 @@ public final class Constants {
     public static final float MODIFIER_30_POS = 1.3f;
     public static final float MODIFIER_40_POS = 1.4f;
 
-    public static final float MODIFIER_5_NEG = 0.95f;
     public static final float MODIFIER_10_NEG = 0.9f;
-    public static final float MODIFIER_15_NEG = 0.85f;
     public static final float MODIFIER_20_NEG = 0.8f;
-    public static final float MODIFIER_25_NEG = 0.75f;
-    public static final float MODIFIER_30_NEG = 0.7f;
-    public static final float MODIFIER_40_NEG = 0.6f;
 
     public static final int XP_INDICATOR = 200;
     public static final int XP_MULTIPLIER = 40;
@@ -78,7 +73,7 @@ public final class Constants {
     public static final float WIZARD_ABILITY_2_GROWTH = 0.02f;
     public static final float WIZARD_ABILITY_2_CAP = 0.7f;
 
-    public static final float DAMAGE_MOD_5 = 0.5f;
+    public static final float DAMAGE_MOD_5 = 0.05f;
     public static final float DAMAGE_MOD_10 = 0.1f;
     public static final float DAMAGE_MOD_15 = 0.15f;
     public static final float DAMAGE_MOD_20 = 0.2f;

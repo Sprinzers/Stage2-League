@@ -77,7 +77,7 @@ public class Pyromancer extends Champion {
      */
     public void reduceRaceMod(final float newRaceMod) {
         setRaceModWizardFirst(getRaceModWizardFirst() - newRaceMod);
-        setRaceModWizardSecond(getRaceModWizardSecond() + newRaceMod);
+        setRaceModWizardSecond(getRaceModWizardSecond() - newRaceMod);
         setRaceModRogueFirst(getRaceModRogueFirst() - newRaceMod);
         setRaceModRogueSecond(getRaceModRogueSecond() - newRaceMod);
         setRaceModPyromancerFirst(getRaceModPyromancerFirst() - newRaceMod);
@@ -111,11 +111,16 @@ public class Pyromancer extends Champion {
             firstDamage += firstDamage * getTerrainModifier();
             secondDamage += secondDamage * getTerrainModifier();
             overTime += overTime * getTerrainModifier();
+            firstDamage = Math.round(firstDamage);
+            secondDamage = Math.round(secondDamage);
+            overTime = Math.round((overTime));
         }
 
         // race modifier
         firstDamage *= getRaceModKnightFirst();
         secondDamage *= getRaceModKnightSecond();
+        firstDamage = Math.round(firstDamage);
+        secondDamage = Math.round(secondDamage);
 
         // DOT effects
         overTime *= getRaceModKnightSecond();
@@ -145,11 +150,16 @@ public class Pyromancer extends Champion {
             firstDamage += firstDamage * getTerrainModifier();
             secondDamage += secondDamage * getTerrainModifier();
             overTime += overTime * getTerrainModifier();
+            firstDamage = Math.round(firstDamage);
+            secondDamage = Math.round(secondDamage);
+            overTime = Math.round(overTime);
         }
 
         // race modifier
         firstDamage *= getRaceModPyromancerFirst();
         secondDamage *= getRaceModPyromancerSecond();
+        firstDamage = Math.round(firstDamage);
+        secondDamage = Math.round(secondDamage);
 
         // DOT effects
         overTime *= getRaceModPyromancerSecond();
@@ -179,11 +189,16 @@ public class Pyromancer extends Champion {
             firstDamage += firstDamage * getTerrainModifier();
             secondDamage += secondDamage * getTerrainModifier();
             overTime += overTime * getTerrainModifier();
+            firstDamage = Math.round(firstDamage);
+            secondDamage = Math.round(secondDamage);
+            overTime = Math.round(overTime);
         }
 
         // race modifier
         firstDamage *= getRaceModRogueFirst();
         secondDamage *= getRaceModRogueSecond();
+        firstDamage = Math.round(firstDamage);
+        secondDamage = Math.round(secondDamage);
 
         // DOT effects
         overTime *= getRaceModRogueSecond();
@@ -213,12 +228,16 @@ public class Pyromancer extends Champion {
             firstDamage += firstDamage * getTerrainModifier();
             secondDamage += secondDamage * getTerrainModifier();
             overTime += overTime * getTerrainModifier();
+            firstDamage = Math.round(firstDamage);
+            secondDamage = Math.round(secondDamage);
             overTime = Math.round(overTime);
         }
 
         // race modifier
         firstDamage *= getRaceModWizardFirst();
         secondDamage *= (getRaceModWizardSecond() - Constants.FLOAT_PRECISION);
+        firstDamage = Math.round(firstDamage);
+        secondDamage = Math.round(secondDamage);
 
         // DOT effects
         overTime *= getRaceModWizardSecond();

@@ -214,7 +214,7 @@ public abstract class Champion {
         return damageOverTime;
     }
 
-    final boolean getApplyTerrainModifier() {
+    public final boolean getApplyTerrainModifier() {
         return applyTerrainModifier;
     }
 

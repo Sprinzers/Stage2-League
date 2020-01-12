@@ -118,12 +118,13 @@ public class Knight extends Champion {
         if (getApplyTerrainModifier()) {
             firstDamage += firstDamage * getTerrainModifier();
             secondDamage += secondDamage * getTerrainModifier();
+            firstDamage = Math.round(firstDamage);
+            secondDamage = Math.round(secondDamage);
         }
 
         // race modifier
-        firstDamage *= getRaceModKnightFirst();
         secondDamage *= getRaceModKnightSecond();
-
+        secondDamage = Math.round(secondDamage);
         // DOT effects
         if (knight.getDamageOverTime().size() > 0) {
             knight.resetDamageOverTime();
@@ -158,11 +159,15 @@ public class Knight extends Champion {
         if (getApplyTerrainModifier()) {
             firstDamage += firstDamage * getTerrainModifier();
             secondDamage += secondDamage * getTerrainModifier();
+            firstDamage = Math.round(firstDamage);
+            secondDamage = Math.round(secondDamage);
         }
 
         // race modifier
-        firstDamage *= getRaceModPyromancerFirst();
-        secondDamage *= getRaceModPyromancerSecond();
+        firstDamage *= (getRaceModPyromancerFirst() - Constants.FLOAT_PRECISION);
+        secondDamage *= (getRaceModPyromancerSecond() - Constants.FLOAT_PRECISION);
+        firstDamage = Math.round(firstDamage);
+        secondDamage = Math.round(secondDamage);
 
         // DOT effects
         if (pyromancer.getDamageOverTime().size() > 0) {
@@ -198,11 +203,15 @@ public class Knight extends Champion {
         if (getApplyTerrainModifier()) {
             firstDamage += firstDamage * getTerrainModifier();
             secondDamage += secondDamage * getTerrainModifier();
+            firstDamage = Math.round(firstDamage);
+            secondDamage = Math.round(secondDamage);
         }
 
         // race modifier
         firstDamage *= getRaceModRogueFirst();
         secondDamage *= getRaceModRogueSecond();
+        firstDamage = Math.round(firstDamage);
+        secondDamage = Math.round(secondDamage);
 
         // DOT efects
         if (rogue.getDamageOverTime().size() > 0) {
@@ -238,11 +247,15 @@ public class Knight extends Champion {
         if (getApplyTerrainModifier()) {
             firstDamage += firstDamage * getTerrainModifier();
             secondDamage += secondDamage * getTerrainModifier();
+            firstDamage = Math.round(firstDamage);
+            secondDamage = Math.round(secondDamage);
         }
 
         // race modifier
         firstDamage *= getRaceModWizardFirst();
         secondDamage *= getRaceModWizardSecond();
+        firstDamage = Math.round(firstDamage);
+        secondDamage = Math.round(secondDamage);
 
         // DOT effects
         if (wizard.getDamageOverTime().size() > 0) {

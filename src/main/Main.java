@@ -73,10 +73,8 @@ public final class Main {
                 }
                 // determine which champions have a terrain modifier active and apply DOT effects
                 for (Champion currChampion : champions) {
-                    if (currChampion.getPosX() >= 0 && currChampion.getPosY() >= 0) {
                         currChampion.hasTerrainModifier(map.getTileType(currChampion.getPosX(),
                                 currChampion.getPosY()));
-                    }
                 }
                 // fight all the champions located in the same tile
                 for (Champion currChampion : champions) {
@@ -92,6 +90,7 @@ public final class Main {
                                 opponent.setFoughtThisRound(true);
                                 opponent.isAttackedBy(currChampion);
                                 currChampion.setFoughtThisRound(true);
+
                                 int levelFirstChampion = currChampion.getLevel();
                                 int levelSecondChampion = opponent.getLevel();
                                 // give XP and level up
@@ -111,12 +110,8 @@ public final class Main {
                                     currChampion.notifyKill(opponent);
                                     int levelPlayer1 = currChampion.getLevel();
                                     int levelPlayer2 = opponent.getLevel();
-                                    if (currChampion.awardXP(levelPlayer2)) {
-                                        currChampion.setHP(currChampion.calculateTheoreticalHP());
-                                    }
-                                    if (opponent.awardXP(levelPlayer1)) {
-                                        opponent.setHP(opponent.calculateTheoreticalHP());
-                                    }
+                                    currChampion.awardXP(levelPlayer2);
+                                    opponent.awardXP(levelPlayer1);
                                 }
                             }
                         }

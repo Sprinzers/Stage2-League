@@ -76,7 +76,6 @@ public class Wizard extends Champion {
         int hpHigh = calculateTheoreticalHP() / Constants.WIZARD_HP_HIGH;
         if (hpLow < getHP() && getHP() < hpHigh) {
             strategy = new FirstStrategyWizard();
-//            System.out.println(getID() + "####");
             strategy.doStrategy(this);
         } else if (getHP() < hpLow) {
             strategy = new SecondStrategyWizard();
