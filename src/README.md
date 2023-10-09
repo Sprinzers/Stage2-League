@@ -1,4 +1,4 @@
-# Stage 2 - LeagueOO
+# Stage 2 - LeagueOOP
 Student: Eren Murat
 Group: 324CA
 
